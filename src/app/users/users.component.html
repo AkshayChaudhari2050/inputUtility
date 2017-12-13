@@ -1,0 +1,29 @@
+<p>
+  users works!
+</p>
+
+<div class="container">
+  <div class="row" *ngFor="let user of Users">
+    <table>
+      <thead>
+        <tr>
+          <th>email:</th>
+          <th>PASSWORD:</th>
+         
+          <!-- <button class="destroy" (click)="deleteuser(user.userid)">Remove user</button> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{user.email}}</td>
+          <td>{{user.PASSWORD}}</td>
+          <a >
+            <span class="badge">{{user.userId}}</span> {{user.email}}
+          </a>
+          <!-- <td>{{user.Std}}</td>
+          <td>{{user.Div}}</td> -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

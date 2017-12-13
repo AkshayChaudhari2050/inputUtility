@@ -1,0 +1,20 @@
+<p>
+  login-component works!
+</p>
+
+<div class="container">
+  <label>
+    <b>Username</b>
+  </label>
+  <input #email >
+  <label>
+    <b>Password</b>
+  </label>
+  <input #PASSWORD>
+  <button (click)="login(email.value,PASSWORD.value);email.value=''; PASSWORD.value='' "> Login</button></div>
+<div class="container" style="background-color:#f1f1f1">
+  <button type="button" class="cancelbtn">Cancel</button>
+  <span class="psw">Forgot
+    <a href="#">password?</a>
+  </span>
+</div>
