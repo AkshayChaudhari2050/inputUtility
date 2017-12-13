@@ -11,11 +11,15 @@ jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt')
 jwtOptions.secretOrKey = 'tasmanianDevil';
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
-var { JWT_SECRET } = require('../config/index');
+var {
+  JWT_SECRET
+} = require('../config/index');
 
 module.exports = (app, db) => {
   app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({ extended: true })); 
+  app.use(bodyParser.urlencoded({
+    extended: true
+  }));
   //get All users
   app.use(cookieParser());
   app.use(passport.initialize());
@@ -33,7 +37,7 @@ module.exports = (app, db) => {
   });
 
   passport.use(strategy);
-  
+
   app.use(session({
     key: 'user_Id',
     secret: 'somerandonstuffs',
@@ -42,27 +46,30 @@ module.exports = (app, db) => {
   }));
 
   app.get('/api/users',
-   passport.authenticate('jwt', {
-    session: false
-     }), (req, res) => {
-    db.user.findAll()
-      .then(users => {
-        res.json(users);
-      });
-  });
+    passport.authenticate('jwt', {
+      session: false
+    }), (req, res) => {
+      db.user.findAll()
+        .then(users => {
+          res.json(users);
+        });
+    });
   //get User By Id
   app.get('/api/user/:userId', (req, res) => {
-    const userId = req.params.userId;
-    db.user.find({
-      where: {
-        userId: userId
-      }
-    }).then(user => {
-      res.json(user)
-    }).catch(function (error) {
-      res.status(500).json(error);
-    });
+    if (req.session.user) {
+      const userId = req.params.userId;
+      db.user.find({
+        where: {
+          userId: userId
+        }
+      }).then(user => {
+        res.json(user)
+      }).catch(function (error) {
+        res.status(500).json(error);
+      });
+    }
   })
+
   // User data
   app.post('/api/user', (req, res) => {
     const email = req.body.email;
@@ -137,22 +144,26 @@ module.exports = (app, db) => {
         var payload = {
           userId: user.userId
         };
-        var token = jwt.sign(payload, jwtOptions.secretOrKey,{ expiresIn: '1h' });
+        var token = jwt.sign(payload, jwtOptions.secretOrKey, {
+          expiresIn: '1h'
+        });
         req.session.user = user;
-        JWT_SECRET=token;
-        console.log('JWT_SECRET',JWT_SECRET)
+        // req.session.token = user.getSessionToken();
+        JWT_SECRET = token;
+        console.log('JWT_SECRET', JWT_SECRET)
+
         res.json({
           token: token
         });
       }
     });
   });
-  
-app.get('/logout', function(req, res){
-  req.session.destroy(function(){
-     console.log("user logged out.")
+
+  app.get('/logout', function (req, res) {
+    req.session.destroy(function () {
+      console.log("user logged out.")
+    });
+    //res.redirect('/login');
   });
-  //res.redirect('/login');
-});
 
 }
