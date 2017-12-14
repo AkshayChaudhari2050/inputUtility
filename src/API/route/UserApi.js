@@ -55,8 +55,10 @@ module.exports = (app, db) => {
         });
     });
   //get User By Id
-  app.get('/api/user/:userId', (req, res) => {
-    if (req.session.user) {
+  app.get('/api/user/:userId', passport.authenticate('jwt', {
+    session: false
+  }), (req, res) => {
+    
       const userId = req.params.userId;
       db.user.find({
         where: {
@@ -67,7 +69,7 @@ module.exports = (app, db) => {
       }).catch(function (error) {
         res.status(500).json(error);
       });
-    }
+    
   })
 
   // User data
@@ -122,7 +124,6 @@ module.exports = (app, db) => {
   });
 
   app.post('/api/user/login', (req, res) => {
-    var sess;
     var email = req.body.email,
       PASSWORD = req.body.PASSWORD;
     db.user.findOne({
@@ -147,7 +148,8 @@ module.exports = (app, db) => {
         var token = jwt.sign(payload, jwtOptions.secretOrKey, {
           expiresIn: '1h'
         });
-        req.session.user = user;
+        req.session.user = user.dataValues;
+
         // req.session.token = user.getSessionToken();
         JWT_SECRET = token;
         console.log('JWT_SECRET', JWT_SECRET)
