@@ -14,7 +14,6 @@
                 <tr>
                   <th>firstName</th>
                   <th>lastName</th>
-                  <!-- <th>password</th> -->
                   <th>contactNo</th>
                   <th>DateOfBirth</th>
                   <th>address</th>
@@ -37,12 +36,15 @@
                   <td>
                     <!-- <button (click)="deleteProfile(Profile.userId)" >Delete</button>| -->
                     <button class="destroy" (click)="removeProfile(Profile.userId)">Delete</button>
-                    <button class="destroy" (click)="removeProfile(Profile.userId)">Update</button>
+                    <button class="destroy" (click)="getProfileById(Profile.userId)">Update</button>
+                    <!-- <a routerLink="/detail/{{hero.id}}">
+                      <span class="badge">{{hero.id}}</span> {{hero.name}}
+                    </a> -->
                   </td>
                 </tr>               
               </tbody>
             </table>
-          </div>
+          </div>  
         </div>
       </div>
     </div>

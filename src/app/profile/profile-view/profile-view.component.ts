@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../profile.service';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-profile-view',
   templateUrl: './profile-view.component.html',
@@ -8,9 +8,11 @@ import { ProfileService } from '../profile.service';
   providers:[ProfileService]
 })
 export class ProfileViewComponent implements OnInit {
-
-  constructor(private ProfileService:ProfileService) { }
+  constructor(private ProfileService:ProfileService ,private router: Router) { }
   Profiles: any = [];
+  ProfileData: any[];
+  userId: number
+  uId = sessionStorage.getItem('userId');
   ngOnInit() {
     this.getAllProfiles()
   }
@@ -27,4 +29,13 @@ export class ProfileViewComponent implements OnInit {
        this.getAllProfiles()
      }) 
   }
+
+  getProfileById(userId: any) {
+    debugger
+    this.ProfileService.getProfileById(userId).subscribe(res => {
+      this.ProfileData = res
+      this.router.navigate(['/Profile'])
+    })
+  }
+  
 }
