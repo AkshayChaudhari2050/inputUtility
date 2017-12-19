@@ -8,6 +8,9 @@ import 'rxjs/add/operator/catch';
 import { User } from './user';
 import { Router } from "@angular/router";
 import { AlertService } from "./alert-service";
+import { error } from 'selenium-webdriver';
+import { catchError, map, tap } from 'rxjs/operators';
+
 @Component({
   selector: 'app-login-component',
   templateUrl: './login-component.component.html',
@@ -15,28 +18,29 @@ import { AlertService } from "./alert-service";
   providers: [loginService, AlertService]
 })
 export class LoginComponentComponent implements OnInit {
-
   constructor(
     private alertService: AlertService,
-    private loginService: loginService, private router: Router, private http: Http
+    private loginService: loginService,
+    private router: Router,
+    private http: Http
   ) { }
   ngOnInit() {
     this.loginService.logout()
   }
-  User: User[]
+  User = new User()
   loading = false;
-  login(email: string, PASSWORD: string): void {
-    this.loading = true
-    if (!email) { return; }
-    debugger
-    this.loginService.login(email, PASSWORD)
-      .subscribe(
-      data => {
-        this.router.navigate(['/']);
-      },
-      error => {
-        this.alertService.error(error);
+  error = '';
+
+  login(email: string, password: string): void {
+    if (!email) { alert("invalid Username Password") }
+    this.loginService.login(email, password).subscribe(result => {
+      debugger
+      if (result === true) {
+        this.router.navigate(['profileById']);
+      } else {
+        this.error = 'Username or password is incorrect';
         this.loading = false;
-      });
-  }
-}
+      }
+    });
+  };
+};

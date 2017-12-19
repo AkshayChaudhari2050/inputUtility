@@ -1,16 +1,35 @@
-var bcrypt = require('bcrypt');
 module.exports = (sequelize, DataTypes) => {
-  const user = sequelize.define('tblUser', {
-    userId: {
+  const Profile = sequelize.define('tblprofile', {
+    profileId: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    email: {
+    firstName: {
       type: DataTypes.STRING,
       required: true
     },
-    password: {
+    lastName: {
+      type: DataTypes.STRING,
+      required: true
+    },
+    contactNo: {
+      type: DataTypes.STRING,
+      required: true
+    },
+    dateOfBirth: {
+      type: DataTypes.STRING,
+      required: true
+    },
+    address: {
+      type: DataTypes.STRING,
+      required: true
+    },
+    city: {
+      type: DataTypes.STRING,
+      required: true
+    },
+    STATUS: {
       type: DataTypes.STRING,
       required: true
     },
@@ -23,11 +42,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       required: true,
       defaultValue: DataTypes.literal('CURRENT_TIMESTAMP')
-    },    
+    },
     IsDeleted: {
       type: DataTypes.BOOLEAN,
-      required: true
-    },    
+      required: true,
+      defaultValue:false
+    },
     createdBy: {
       type: DataTypes.INTEGER,
       required: true
@@ -36,23 +56,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       required: true
     },
-    roleId: {
+    userId: {
       type: DataTypes.INTEGER,
       required: true,
       references: {
-        model: 'role',
-        key: 'roleId'
+        model: 'user',
+        key: 'userId'
       },
       onUpdate: 'cascade',
       onDelete: 'cascade'
     }
-  }, {
-    hooks: {
-      beforeCreate: (user) => {
-        const salt = bcrypt.genSaltSync();
-        user.password = bcrypt.hashSync(user.password, salt);
-      }
-    }
   })
-  return user
+  return Profile
 };

@@ -14,6 +14,7 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 db.role = require('../model/role')(sequelize, Sequelize);
 db.user = require('../model/User')(sequelize, Sequelize);
+db.Users = require('../model/Users')(sequelize, Sequelize);
 // db.Category = require('../model/category')(sequelize, Sequelize);
 db.Profile = require('../model/Profile')(sequelize, Sequelize);
 // db.ShoppingCart= require('../model/ShoppingCart')(sequelize, Sequelize);

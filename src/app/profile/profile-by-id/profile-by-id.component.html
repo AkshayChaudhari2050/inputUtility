@@ -1,0 +1,73 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="header">
+            <!-- <h4 class="title"> {{ProfileData.Email}}</h4> -->
+            <!-- <a [routerLink]="['/addUser']" class="btn btn-link">Add User</a> -->
+            <button  [routerLink]="['/Logout']">Logout</button>
+          </div>
+          <div class="content table-responsive table-full-width">
+            <table class="table table-hover table-striped">
+              <thead>
+                <tr>
+                  <th>firstName</th>
+                  <th>lastName</th>
+                  <!-- <th>password</th> -->
+                  <th>contactNo</th>
+                  <th>DateOfBirth</th>
+                  <th>address</th>
+                  <th>city</th>
+                  <th>Email</th> 
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let p of ProfileData">
+                  <td>{{p.firstName}}</td>
+                  <td>{{p.lastName}}</td>
+                  <!-- <td>{{user.password}}</td> -->
+                  <td>{{p.contactNo}}</td>
+                  <td>{{p.DateOfBirth}}</td>
+                  <td>{{p.address}}</td>
+                  <td>{{p.city}}</td>
+                  <td>{{p.Email}}</td>
+                  <td>
+                  <a href="#">edit</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- </div> -->
+<!-- 
+<div class="container">
+  <div class="row" >
+    <table>
+      <thead>
+        <tr>
+          <th>User email:</th>
+          <th>User password:</th>
+          <th>User ADDRESS</th>
+          <th>User Div</th>         
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of Users">
+          <td>{{user.email}}</td>
+          <td>{{user.password}}</td>
+          <td>{{user.ADDRESS}}</td>
+          <td>{{user.City}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div> -->

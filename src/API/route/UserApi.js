@@ -37,7 +37,6 @@ module.exports = (app, db) => {
   });
 
   passport.use(strategy);
-
   app.use(session({
     key: 'user_Id',
     secret: 'somerandonstuffs',
@@ -45,7 +44,7 @@ module.exports = (app, db) => {
     saveUninitialized: false,
   }));
 
-  app.get('/api/users',
+  app.get('/api/user',
     passport.authenticate('jwt', {
       session: false
     }), (req, res) => {
@@ -58,28 +57,25 @@ module.exports = (app, db) => {
   app.get('/api/user/:userId', passport.authenticate('jwt', {
     session: false
   }), (req, res) => {
-    
-      const userId = req.params.userId;
-      db.user.find({
-        where: {
-          userId: userId
-        }
-      }).then(user => {
-        res.json(user)
-      }).catch(function (error) {
-        res.status(500).json(error);
-      });
-    
+    const userId = req.params.userId;
+    db.user.find({
+      where: {
+        userId: userId
+      }
+    }).then(user => {
+      res.json(user)
+    }).catch(function (error) {
+      res.status(500).json(error);
+    });
   })
-
   // User data
   app.post('/api/user', (req, res) => {
     const email = req.body.email;
-    const PASSWORD = req.body.PASSWORD;
+    const password = req.body.password;
     const roleId = req.body.roleId;
     db.user.create({
       email: email,
-      PASSWORD: PASSWORD,
+      password: password,
       roleId: roleId
     }).then(newuser => {
       res.json(newuser)
@@ -87,11 +83,12 @@ module.exports = (app, db) => {
       res.status(500).json(error);
     });
   })
+
   app.put('/api/user/:userId', (req, res) => {
     const userId = req.params.userId;
     const updates = {
       email: req.body.email,
-      PASSWORD: req.body.PASSWORD,
+      password: req.body.password,
       roleId: req.body.roleId,
     }
     db.user.find({
@@ -123,9 +120,24 @@ module.exports = (app, db) => {
       });
   });
 
+  app.delete('/user/delete/:userId', (req, res) => {
+    const userId = req.params.userId;
+    db.Users.destroy({
+        where: {
+          userId: userId
+        }
+      })
+      .then(Deleteuser => {
+        res.json(Deleteuser);
+      }).catch(function (error) {
+        res.status(500).json(error);
+      });
+  });
+
+
   app.post('/api/user/login', (req, res) => {
     var email = req.body.email,
-      PASSWORD = req.body.PASSWORD;
+      password = req.body.password;
     db.user.findOne({
       where: {
         email: email
@@ -136,7 +148,7 @@ module.exports = (app, db) => {
           succes: false,
           msg: "No User Found"
         })
-      } else if (!bcrypt.compareSync(PASSWORD, user.PASSWORD)) {
+      } else if (!bcrypt.compareSync(password, user.password)) {
         res.json({
           succes: false,
           msg: "Password Not Match"
@@ -149,11 +161,6 @@ module.exports = (app, db) => {
           expiresIn: '1h'
         });
         req.session.user = user.dataValues;
-
-        // req.session.token = user.getSessionToken();
-        JWT_SECRET = token;
-        console.log('JWT_SECRET', JWT_SECRET)
-
         res.json({
           token: token
         });
@@ -167,5 +174,4 @@ module.exports = (app, db) => {
     });
     //res.redirect('/login');
   });
-
 }

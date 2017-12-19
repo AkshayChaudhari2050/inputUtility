@@ -1,8 +1,17 @@
 <!--The content below is only a placeholder and can be replaced.-->
+<link data-require="bootstrap@*" data-semver="4.0.5" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"/>
+
+<script data-require="bootstrap@*" data-semver="4.0.5" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"></script>
+<!-- <link  rel="stylesheet" href="../assets/bootstrap.min.css"/> -->
+<!-- <script  src="../assets/bootstrap.min.js"></script> -->
 <div style="text-align:center">
   <h1>
     Welcome to {{ title }}!
   </h1>
 </div>
-<app-users></app-users>
+<nav align='center'>
+  <a routerLink="Users">users</a>
+  <a routerLink="Profile">Register</a>
+  <a routerLink="Profiles">Profiles</a>
+</nav>
 <router-outlet></router-outlet>

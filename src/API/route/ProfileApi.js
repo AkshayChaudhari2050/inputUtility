@@ -79,5 +79,29 @@ module.exports = (app, db) => {
       .then(DeleteProfile => {
         res.json(DeleteProfile);
       });
-  });
+    });
+  // });
+  // app.post('/api/pro', (req, res) => {
+  //   seq.query("Call Login(:email,:password)",
+  //   {replacements: { email: "me@jsbot.io", pwd: 'pwd'}})
+  //   .then(v=>console.log(v));
+  // })
+  //   try {
+  
+  //     let playersList = await this.sequelize.query('CALL sp_discovery (:p_user, :p_game, :p_platform, :p_headphone,:p_start,:p_end , :p_stanceId , @o_rowcnt )', {
+  //       replacements: {
+  //         p_user: UserId,
+  //         p_game: requestObject.gameid,
+  //         p_platform: requestObject.platformid,
+  //         p_headphone: requestObject.headphone,
+  //         p_start: requestObject.index,
+  //         p_end: requestObject.limit,
+  //         p_stanceId: requestObject.stanceid
+  //       }
+  //     });
+  //     return playersList;
+  //   } catch (e) {
+  //     return e;
+  //   }
+
 }

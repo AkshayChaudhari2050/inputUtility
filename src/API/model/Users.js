@@ -1,25 +1,25 @@
 var bcrypt = require('bcrypt');
 module.exports = (sequelize, DataTypes) => {
-  const user = sequelize.define('tblUser', {
+  const Users = sequelize.define('tblUsers', {
     userId: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    email: {
+    Email: {
       type: DataTypes.STRING,
       required: true
     },
-    password: {
+    Password: {
       type: DataTypes.STRING,
       required: true
     },
-    createdon: {
+    createdOn: {
       type: DataTypes.DATE,
       required: true,
       defaultValue: DataTypes.literal('CURRENT_TIMESTAMP')
     },
-    modifiedon: {
+    modifiedOn: {
       type: DataTypes.DATE,
       required: true,
       defaultValue: DataTypes.literal('CURRENT_TIMESTAMP')
@@ -48,11 +48,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     hooks: {
-      beforeCreate: (user) => {
+      beforeCreate: (Users) => {
         const salt = bcrypt.genSaltSync();
-        user.password = bcrypt.hashSync(user.password, salt);
+        Users.Password = bcrypt.hashSync(Users.Password, salt);
       }
     }
   })
-  return user
+  return Users
 };

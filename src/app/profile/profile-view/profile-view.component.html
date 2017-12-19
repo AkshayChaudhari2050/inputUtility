@@ -1,0 +1,76 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="header">
+            <h4 class="title">Profiles View</h4>
+            <!-- <a [routerLink]="['/addUser']" class="btn btn-link">Add User</a> -->
+         
+          </div>
+          <div class="content table-responsive table-full-width">
+            <table class="table table-hover table-striped">
+              <thead>
+                <tr>
+                  <th>firstName</th>
+                  <th>lastName</th>
+                  <!-- <th>password</th> -->
+                  <th>contactNo</th>
+                  <th>DateOfBirth</th>
+                  <th>address</th>
+                  <th>city</th>
+                  <th>Email</th> 
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let Profile of Profiles">
+                    <!-- <td>{{Profile.userId}}</td> -->
+                  <td>{{Profile.firstName}}</td>                  
+                  <td>{{Profile.lastName}}</td>
+                  <!-- <td>{{user.password}}</td> -->
+                  <td>{{Profile.contactNo}}</td>
+                  <td>{{Profile.DateOfBirth}}</td>
+                  <td>{{Profile.address}}</td>  
+                  <td>{{Profile.city}}</td>
+                  <td>{{Profile.Email}}</td>
+                  <td>
+                    <!-- <button (click)="deleteProfile(Profile.userId)" >Delete</button>| -->
+                    <button class="destroy" (click)="removeProfile(Profile.userId)">Delete</button>
+                    <button class="destroy" (click)="removeProfile(Profile.userId)">Update</button>
+                  </td>
+                </tr>               
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- </div> -->
+<!-- 
+<div class="container">
+  <div class="row" >
+    <table>
+      <thead>
+        <tr>
+          <th>User email:</th>
+          <th>User password:</th>
+          <th>User ADDRESS</th>
+          <th>User Div</th>         
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of Users">
+          <td>{{user.email}}</td>
+          <td>{{user.password}}</td>
+          <td>{{user.ADDRESS}}</td>
+          <td>{{user.City}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div> -->

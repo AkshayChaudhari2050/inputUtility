@@ -1,20 +1,36 @@
-<p>
-  login-component works!
-</p>
-
 <div class="container">
-  <label>
-    <b>Username</b>
-  </label>
-  <input #email >
-  <label>
-    <b>Password</b>
-  </label>
-  <input #PASSWORD>
-  <button (click)="login(email.value,PASSWORD.value);email.value=''; PASSWORD.value='' "> Login</button></div>
-<div class="container" style="background-color:#f1f1f1">
-  <button type="button" class="cancelbtn">Cancel</button>
-  <span class="psw">Forgot
-    <a href="#">password?</a>
-  </span>
+  <form #Login="ngForm">
+    <!-- <div *ngIf="!authenticationFlag" class="help-block error small">Username or password is incorrect.</div> -->
+    <div class="col-sm-10">
+      <!-- <div class="form-group row"> -->
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email" class="form-control" id="email" required="required" #email="ngModel" [(ngModel)]="User.email" name="email"
+        pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}">
+      <!-- <input type="email" class="form-control" required="required" #email="ngModel" [(ngModel)]="User.email" name="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"> -->
+      <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+        <div [hidden]="!email.hasError('required')">Email is required</div>
+        <!-- <div [hidden]="!email.hasError('pattern')">Email format should be joe@abc.com </div> -->
+        <span class="error" ng-show="Login.input.$error.email">
+          Email format should be joe@abc.com</span>
+      </div>
+    </div>
+    <div class="col-sm-10">
+      <label for="exampleInputPassword1">Password</label>
+      <input id="password" type="password" minlength="4" class="form-control" required="required" #password="ngModel" [(ngModel)]="User.password"
+        name="password" #password="ngModel">
+      <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+        <div [hidden]="!password.hasError('minlength')">password should be 6 digit</div>
+        <div [hidden]="!password.hasError('required')"> Password is required</div>
+      </div>
+      <ng2-password-strength-bar [passwordToCheck]="User.password" [barLabel]="barLabel">
+      </ng2-password-strength-bar>
+    </div>
+    <div>
+      <button class="btn btn-primary"  [disabled]="Login.invalid" (click)="login(email.value,password.value);Login.reset()">Login</button>
+      <button class="btn btn-primary " (click)="Login.reset()">Reset</button>
+      <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+    </div>  
+    <br>
+    <div  *ngIf="error"  class="alert alert-danger">{{error}}</div>
+  </form>
 </div>

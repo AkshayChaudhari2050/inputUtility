@@ -15,9 +15,10 @@ function createWindow() {
     icon: `file://${__dirname}/dist/assets/logo.png`
   })
   // win.loadURL('http://localhost:4200/')
-  win.loadURL(`file://${__dirname}/dist/index.html`)
+  win.loadURL('http://localhost:4200/')
+  // win.loadURL(`file://${__dirname}/dist/index.html`)
   //// uncomment below to open the DevTools.
-  //win.webContents.openDevTools()
+  win.webContents.openDevTools()
 
   // Event when the window is closed.
   win.on('closed', function () {

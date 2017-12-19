@@ -1,15 +1,13 @@
-<p>
-  users works!
-</p>
-
+<nav>
+    <button class="destroy" (click)="logout()">Logout</button>
+</nav>
 <div class="container">
   <div class="row" *ngFor="let user of Users">
     <table>
       <thead>
         <tr>
           <th>email:</th>
-          <th>PASSWORD:</th>
-         
+          <th>PASSWORD:</th>         
           <!-- <button class="destroy" (click)="deleteuser(user.userid)">Remove user</button> -->
         </tr>
       </thead>

@@ -1,0 +1,106 @@
+<div class="container">
+  <form #User="ngForm">
+    <div class="col-sm-10">
+      <label for="exampleInputEmail1">firstName</label>
+      <input class="form-control" type="text" name='firstName' required="required" #firstName="ngModel" [(ngModel)]="UserModel.firstName">
+      <div [hidden]="firstName.valid || firstName.pristine" class="alert alert-danger">
+        <div [hidden]="!firstName.hasError('required')">firstName is required</div>
+        <!-- <div [hidden]="!address.hasError('pattern')">Only alphabetsallowed</div> -->
+      </div>
+    </div>
+    <div class="col-sm-10">
+      <label for="exampleInputEmail1">lastName</label>
+      <input class="form-control" type="text" name='lastName' required="required" #lastName="ngModel" [(ngModel)]="UserModel.lastName">
+      <div [hidden]="lastName.valid || lastName.pristine" class="alert alert-danger">
+        <div [hidden]="!lastName.hasError('required')">lastName is required</div>
+        <!-- <div [hidden]="!address.hasError('pattern')">Only alphabetsallowed</div> -->
+      </div>
+    </div>
+
+    <div class="col-sm-10">
+      <label for="exampleInputEmail1">contactNo</label>
+      <input type="text" class="form-control" required="required" [(ngModel)]="UserModel.contactNo" name="PhoneNonumber" pattern="[0-9]*"
+        minlength="10" maxlength="10" #contactNo="ngModel">
+      <div [hidden]="contactNo.valid || contactNo.pristine" class="alert alert-danger">
+        <div [hidden]="!contactNo.hasError('minlength')">PhoneNo should be 10digit</div>
+        <div [hidden]="!contactNo.hasError('required')">PhoneNo is required</div>
+        <div [hidden]="!contactNo.hasError('pattern')">PhoneNo numberr should be only numbers</div>
+      </div>
+    </div>
+
+    <div class="col-sm-10">
+      <label>DateOfBirth</label>
+      <input type="date" class="form-control" name="DateOfBirth" required="required" #DateOfBirth="ngModel" [(ngModel)]="UserModel.DateOfBirth">
+      <div [hidden]="DateOfBirth.valid || DateOfBirth.pristine" class="alert alert-danger">
+        <div [hidden]="!DateOfBirth.hasError('required')">DateOfBirth is required</div>
+        <!-- <div [hidden]="!address.hasError('pattern')">Only alphabetsallowed</div> -->
+      </div>
+    </div>
+
+    <div class="col-sm-10">
+      <label>address</label>
+      <input type="text" class="form-control" required="required" [(ngModel)]="UserModel.address" name="address" #address="ngModel">
+      <div [hidden]="address.valid || address.pristine" class="alert alert-danger">
+        <div [hidden]="!address.hasError('required')">ADDRESS is required</div>
+        <!-- <div [hidden]="!address.hasError('pattern')">Only alphabetsallowed</div> -->
+      </div>
+    </div>
+
+    <div class="col-sm-10">
+      <label>city</label>
+      <input type="text" class="form-control" required="required" #city="ngModel" pattern="[a-zA-Z][a-zA-Z ]+" [(ngModel)]="UserModel.city"
+        name="city">
+      <div [hidden]="city.valid || city.pristine" class="alert alert-danger">
+        <div [hidden]="!city.hasError('required')">City is required</div>
+        <div [hidden]="!city.hasError('pattern')">Only alphabetsallowed</div>
+      </div>
+    </div>
+
+    <div class="col-sm-10">
+      <label>Email</label>
+      <input type="email" class="form-control" required="required" #email="ngModel" [(ngModel)]="UserModel.email" name="email"
+        pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+      <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+        <div [hidden]="!email.hasError('required')">Email is required</div>
+        <div [hidden]="!email.hasError('pattern')">Email format should be
+          <small>
+            <b>joe@abc.com</b>
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-10">
+      <label>Password</label>
+      <input type="Password" minlength="6" maxlength="15" class="form-control" required="required" #Password="ngModel" [(ngModel)]="UserModel.Password"
+        name="Password" #Password="ngModel">
+      <div [hidden]="Password.valid || Password.pristine" class="alert alert-danger">
+        <div [hidden]="!Password.hasError('minlength')">Password should be 6 digit</div>
+        <div [hidden]="!Password.hasError('required')"> Password is required</div>
+      </div>
+      <ng2-password-strength-bar [passwordToCheck]="UserModel.Password" [barLabel]="barLabel">
+      </ng2-password-strength-bar>
+    </div>
+
+    <!-- <div class="col-sm-10">
+      <label>ConFirm Password</label>
+      <input type="Password" class="form-control" name="CPassword" [ngModel]="UserModel.CPassword" required validateEqual="Password"
+        reverse="false" #CPassword="ngModel">
+      <div [hidden]="CPassword.valid || (CPassword.pristine )" class="text-danger">
+        Password mismatch
+      </div>
+    </div> -->
+    <br>
+   
+    <div>
+      <button (click)="addProfile(email.value,Password.value,roleId,userid,firstName.value,lastName.value,contactNo.value,
+      DateOfBirth.value,
+      address.value,
+      city.value,modifiedBy,createdBy,Status); email.value='';Password.value='';firstName.value='';lastName.value='';contactNo.value='';
+      DateOfBirth.value='';
+      address.value='';
+      city.value='';"  [disabled]="User.invalid" class="btn btn-primary">Login</button>
+      <button (click)="User.reset()" class="btn btn-primary">Reset</button>
+    </div>
+  </form>
+</div>
