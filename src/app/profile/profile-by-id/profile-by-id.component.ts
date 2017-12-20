@@ -24,5 +24,4 @@ export class ProfileByIdComponent implements OnInit {
       this.ProfileData = res
     })
   }
-
 }

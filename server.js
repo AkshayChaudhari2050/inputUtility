@@ -17,7 +17,17 @@ var bcrypt = require('bcrypt');
 //jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt')
 jwtOptions.secretOrKey = 'tasmanianDevil';
-
+var generator = require('generate-password');
+const nodemailer = require('nodemailer');
+let transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true, // true for 465, false for other ports
+  auth: {
+    user: "akshay.chaudhari@balajiinfosol.com", // generated ethereal user
+    pass: "akki@2050" // generated ethereal password
+  }
+});
 
 // headers.append('Access-Control-Allow-Origin', 'http://localhost:3000');
 app.use(morgan('dev'));
@@ -36,6 +46,12 @@ app.use(bodyParser.json())
 router(app, db);
 
 app.get("/api/", function (req, res) {
+  
+var password = generator.generate({
+  length: 10,
+  numbers: true
+});
+console.log("password"+password)
   res.json({
     message: "Express is up!"
   });
@@ -75,7 +91,7 @@ app.post('/api/login', (req, res) => {
       if (recordset.recordset.length > 0) {
         var pass = JSON.stringify(recordset.recordset);
         var p = JSON.parse(pass)[0].password
-        console.log("password:", pass)
+        console.log("password:", p)
         if (bcrypt.compareSync(password, JSON.parse(pass)[0].password)) {
           request.input('Email', sql.NVarChar, Email)
             .input('password', sql.NVarChar, p)
@@ -104,12 +120,17 @@ app.post('/api/insert', (req, res) => {
   const Status = req.body.Status;
   const userId = req.body.userId;
   const Email = req.body.Email
-  const Password = req.body.Password
+  // const Password = req.body.Password
   const roleId = req.body.roleId
   const modifiedBy = req.body.modifiedBy
   const createdBy = req.body.createdBy
   //hash to password
-  var hashPassword = bcrypt.hashSync(Password, 10);
+  var password = generator.generate({
+    length: 10,
+    numbers: true
+  });
+  console.log("password"+password)
+  var hashPassword = bcrypt.hashSync(password, 10);
   var request = new sql.Request();
   request.input('Email', sql.NVarChar, Email)
     .input('Password', sql.NVarChar, hashPassword)
@@ -127,6 +148,21 @@ app.post('/api/insert', (req, res) => {
     .execute('dbo.stp_ProfileSave').then(function (recordsets) {
       console.log("returnValue:", recordsets.returnValue)
       // res.end(JSON.stringify(recordsets.recordset));
+      let mailOptions = {
+        from: 'akshay.chaudhari@balajiinfosol.com', // sender address
+        to: Email, // list of receivers
+        subject:"Password" , // Subject line
+        text: "Your Password Is="+ password // plain text body
+        // html: '<b>password Reset Link</b> {{password}}' // html body
+      };
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          return console.log(error);
+        }
+        console.log('Message sent: %s', info.messageId);
+        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+      });
+      res.send("Email has been sent successfully");
     }).catch(function (err) {
       console.log(err);
     });
@@ -158,7 +194,7 @@ app.get('/api/getProfile/:userId', (req, res) => {
 //Delete User
 app.delete('/api/deleteUser/:userId', (req, res) => {
   const userId = req.params.userId;
-  var request = new sql.Request();  
+  var request = new sql.Request();
   request.input('userid', sql.Int, userId)
     .execute('stp_ProfileDelete').then(function (recordsets) {
       console.log("returnValue:", recordsets.returnValue)
@@ -169,4 +205,18 @@ app.delete('/api/deleteUser/:userId', (req, res) => {
     });
 }); // DELETE si
 
-
+app.post('/api/updatePassword', function(req,res) {
+  const userId = req.body.userId;
+  const password = req.body.password
+  var request = new sql.Request();
+  var hashPassword = bcrypt.hashSync(password, 10);
+    request.input('Password', sql.NVarChar, hashPassword)
+    .input('userId', sql.Int, userId)
+    .execute('stp_PasswordUpdate').then(function (recordsets) {
+      console.log("returnValue:", recordsets.returnValue)
+      // res.end(JSON.stringify(recordsets.recordset));
+      res.json(recordsets.returnValue)
+    }).catch(function (err) {
+      console.log(err);
+    });
+})

@@ -1,6 +1,6 @@
 export class UserModel {
     Email: string
-    Password: string
+    // Password: string
     roleId: number
     userId: number
     firstName: string

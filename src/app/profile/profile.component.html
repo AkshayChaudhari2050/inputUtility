@@ -58,8 +58,9 @@
 
     <div class="col-sm-10">
       <label>Email</label>
-      <input type="email" class="form-control" required="required" #email="ngModel" [(ngModel)]="UserModel.email" name="email"
-        pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+      <!-- <input type="text" class="form-control" required="required" #email="ngModel" [(ngModel)]="UserModel.email" name="email"
+      pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"> -->
+      <input type="text" class="form-control" required="required" #email="ngModel" [(ngModel)]="UserModel.email" name="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}">
       <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
         <div [hidden]="!email.hasError('required')">Email is required</div>
         <div [hidden]="!email.hasError('pattern')">Email format should be
@@ -69,7 +70,7 @@
         </div>
       </div>
     </div>
-
+    <!-- 
     <div class="col-sm-10">
       <label>Password</label>
       <input type="Password" minlength="6" maxlength="15" class="form-control" required="required" #Password="ngModel" [(ngModel)]="UserModel.Password"
@@ -80,7 +81,7 @@
       </div>
       <ng2-password-strength-bar [passwordToCheck]="UserModel.Password" [barLabel]="barLabel">
       </ng2-password-strength-bar>
-    </div>
+    </div> -->
 
     <!-- <div class="col-sm-10">
       <label>ConFirm Password</label>
@@ -91,15 +92,14 @@
       </div>
     </div> -->
     <br>
-   
     <div>
-      <button (click)="addProfile(email.value,Password.value,roleId,userid,firstName.value,lastName.value,contactNo.value,
+      <button (click)="addProfile(email.value,roleId,userid,firstName.value,lastName.value,contactNo.value,
       DateOfBirth.value,
       address.value,
-      city.value,modifiedBy,createdBy,Status); email.value='';Password.value='';firstName.value='';lastName.value='';contactNo.value='';
+      city.value,modifiedBy,createdBy,Status); email.value='';firstName.value='';lastName.value='';contactNo.value='';
       DateOfBirth.value='';
       address.value='';
-      city.value='';"  [disabled]="User.invalid" class="btn btn-primary">Login</button>
+      city.value='';" [disabled]="User.invalid" class="btn btn-primary">Login</button>
       <button (click)="User.reset()" class="btn btn-primary">Reset</button>
     </div>
   </form>

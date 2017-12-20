@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
   }
   addProfile(Email: string,
-    Password: string,
+    // Password: string,
     roleId:number,
     userId: number,
     firstName: string,
@@ -37,7 +37,7 @@ export class ProfileComponent implements OnInit {
     createdBy=0,
     Status=1;
     this.ProfileService.addProfile({
-      Email, Password, roleId, userId, firstName
+      Email,roleId, userId, firstName
       , lastName, contactNo, DateOfBirth, address, city, modifiedBy, createdBy,Status
     }).subscribe()
     // this.getProfileById(userId)

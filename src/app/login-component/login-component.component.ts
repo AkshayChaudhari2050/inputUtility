@@ -32,6 +32,7 @@ export class LoginComponentComponent implements OnInit {
   error = '';
 
   login(email: string, password: string): void {
+    this.loading = true;
     if (!email) { alert("invalid Username Password") }
     this.loginService.login(email, password).subscribe(result => {
       debugger
