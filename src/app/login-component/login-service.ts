@@ -16,7 +16,6 @@ import { Router } from "@angular/router";
 export class loginService {
     private messages: Array<string> = [];
     UserApi = ServerWithApiUrl;
-    
     constructor(private http: Http,
         private alertService: AlertService, private router: Router) { }
 
@@ -26,29 +25,44 @@ export class loginService {
         let options = new RequestOptions({ headers: headers });
         let body = JSON.stringify({ email, password });
         return this.http.post(this.UserApi + 'login', body, options).map((res: Response) => {
-            // return this.http.post('http://127.0.0.1:5000/api/user/login', body, options).map((res: Response) => {
             debugger
-            let user = res.json()
-            if (user.returnValue) {
-                sessionStorage.setItem('userId', JSON.stringify(user.returnValue))
-                return true;
+            try {
+                let user = res.json()
+                var pass = JSON.stringify(user.recordset);
+                var p = JSON.parse(pass)[0].userId
+                var isTrue = JSON.parse(pass)[0].IsFirstTime;
+                sessionStorage.setItem('IsFirstTime', isTrue)
+                // console.log("IsFirstTime", isTrue)
+                if (p) {
+                    sessionStorage.setItem('userId', p)
+                    return true;
+                }
+                else {
+                    return false;
+                }
             }
-            else{
-                return false;
+            catch (Exception) {
+                console.log("Invalid ")
             }
-            // else if (user == "Invalid Password") {
-            //     console.log(user)
-            //     alert("Invalid Password")
-            //     this.router.navigate(['']);
-            // } else if (user == "Email does not Exists") {
-            //     debugger
-            //     alert("Invalid Password")            
-            //     this.router.navigate(['']);
-            // }
         });
     }
+    ///logout
     logout() {
-        // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
+    }
+    //Update Password
+    updatePassword(userId, password, Cpassword, oldpass) {
+        debugger
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        let body = JSON.stringify({ userId, password, Cpassword, oldpass });
+        return this.http.post(this.UserApi + 'updatePassword', body, options).map((res: Response) => {
+            let user = res.json()
+            if (user.returnValue) {
+                return true
+            } else {
+                return false
+            }
+        })
     }
 }

@@ -8,14 +8,15 @@ import { ProfileComponent } from './profile/profile.component'
 import { ProfileViewComponent } from './profile/profile-view/profile-view.component'
 import { ProfileByIdComponent } from './profile/profile-by-id/profile-by-id.component'
 import { LogoutComponent } from './logout/logout.component'
-
+import { UpdatePasswordComponent} from '../app/login-component/update-password/update-password.component'
 const routes: Routes = [
   { path: '', component: LoginComponentComponent },
   { path: 'Users', component: UsersComponent },
   { path: 'Profile', component: ProfileComponent },
   { path: 'Profiles', component: ProfileViewComponent },
   { path: 'profileById', component: ProfileByIdComponent },
-  { path: 'Logout', component: LogoutComponent }
+  { path: 'Logout', component: LogoutComponent },
+  { path: 'UpdatePassword', component:  UpdatePasswordComponent }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

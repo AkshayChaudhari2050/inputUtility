@@ -17,10 +17,11 @@ import { ProfileComponent } from './profile/profile.component';
 import { PasswordStrengthBarModule } from 'ng2-password-strength-bar';
 import { ProfileViewComponent } from './profile/profile-view/profile-view.component';
 import { ProfileByIdComponent } from './profile/profile-by-id/profile-by-id.component';
-import { LogoutComponent } from './logout/logout.component'
+import { LogoutComponent } from './logout/logout.component';
+import { UpdatePasswordComponent } from './login-component/update-password/update-password.component'
 @NgModule({
   declarations: [
-    AppComponent, LoginComponentComponent, UsersComponent, ProfileComponent,EqualValidator, ProfileViewComponent, ProfileByIdComponent, LogoutComponent
+    AppComponent, LoginComponentComponent, UsersComponent, ProfileComponent,EqualValidator, ProfileViewComponent, ProfileByIdComponent, LogoutComponent, UpdatePasswordComponent
   ],
   imports: [
     BrowserModule,

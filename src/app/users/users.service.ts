@@ -14,22 +14,20 @@ export class UsersService {
     this.getAllUsers()
   }
   //get All Users
-  token = JSON.parse(sessionStorage.getItem('token'));
-
+  userId = JSON.parse(sessionStorage.getItem('userId'));
   getAllUsers() {
     let headers = new Headers();
     debugger
-    // let token = JSON.parse(sessionStorage.getItem('token'));
-    if (this.token == null) {
+    // let userId = JSON.parse(sessionStorage.getItem('userId'));
+    if (this.userId == null) {
       this.router.navigate(["/"])
     }
     else {
       headers.append('Content-Type', 'application/json');
-      headers.append('Authorization', `JWT ${this.token.token}`);
+      // headers.append('Authorization', `JWT ${this.userId.userId}`);
       let options = new RequestOptions({ headers: headers });
       console.log("ServerWithApiUrl:", ServerWithApiUrl)
       return this.http.get(this.UserApiUrl, options).map(res => res.json())
-      // return this.http.get('http://127.0.0.1:5000/api/users', options).map(res => res.json())
     }
   }
   //Add New User
@@ -37,7 +35,7 @@ export class UsersService {
     let headers = new Headers();
     debugger
     headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', `JWT ${this.token.token}`);
+    headers.append('Authorization', `JWT ${this.userId.userId}`);
     let options = new RequestOptions({ headers: headers });
     let body = JSON.stringify(User);
     return this.http.post(this.UserApiUrl, body, options).map((res: Response) => res.json())
@@ -46,6 +44,6 @@ export class UsersService {
     return this.http.delete(this.UserApiUrl + userId).map((res: Response) => res.json())
   }
   logout() {
-    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('userId');
   }
 }

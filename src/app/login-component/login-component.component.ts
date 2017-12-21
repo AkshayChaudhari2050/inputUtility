@@ -37,7 +37,14 @@ export class LoginComponentComponent implements OnInit {
     this.loginService.login(email, password).subscribe(result => {
       debugger
       if (result === true) {
-        this.router.navigate(['profileById']);
+        var IsFirstTime = sessionStorage.getItem('IsFirstTime');
+        if (IsFirstTime == "true") {
+          this.router.navigate(['UpdatePassword']);
+        }
+        else {
+          this.router.navigate(['profileById']);
+        }
+
       } else {
         this.error = 'Username or password is incorrect';
         this.loading = false;

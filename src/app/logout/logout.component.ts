@@ -14,5 +14,6 @@ export class LogoutComponent implements OnInit {
     // remove user from local storage to log user out
     this.router.navigate(['/'])
     sessionStorage.removeItem('userId');
+    sessionStorage.removeItem('IsFirstTime');
   }
 }

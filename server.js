@@ -46,12 +46,12 @@ app.use(bodyParser.json())
 router(app, db);
 
 app.get("/api/", function (req, res) {
-  
-var password = generator.generate({
-  length: 10,
-  numbers: true
-});
-console.log("password"+password)
+
+  var password = generator.generate({
+    length: 10,
+    numbers: true
+  });
+  console.log("password" + password)
   res.json({
     message: "Express is up!"
   });
@@ -96,7 +96,7 @@ app.post('/api/login', (req, res) => {
           request.input('Email', sql.NVarChar, Email)
             .input('password', sql.NVarChar, p)
             .execute('stp_UserLogin').then(function (recordsets) {
-              console.log("returnValue:", recordsets.returnValue)
+              console.log("returnValue:", recordsets.recordset[0].IsFirstTime)
               res.json(recordsets)
             }).catch(function (err) {
               console.log(err);
@@ -129,7 +129,7 @@ app.post('/api/insert', (req, res) => {
     length: 10,
     numbers: true
   });
-  console.log("password"+password)
+  console.log("password" + password)
   var hashPassword = bcrypt.hashSync(password, 10);
   var request = new sql.Request();
   request.input('Email', sql.NVarChar, Email)
@@ -151,8 +151,8 @@ app.post('/api/insert', (req, res) => {
       let mailOptions = {
         from: 'akshay.chaudhari@balajiinfosol.com', // sender address
         to: Email, // list of receivers
-        subject:"Password" , // Subject line
-        text: "Your Password Is="+ password // plain text body
+        subject: "Password", // Subject line
+        text: "Your Password Is=" + password // plain text body
         // html: '<b>password Reset Link</b> {{password}}' // html body
       };
       transporter.sendMail(mailOptions, (error, info) => {
@@ -205,18 +205,34 @@ app.delete('/api/deleteUser/:userId', (req, res) => {
     });
 }); // DELETE si
 
-app.post('/api/updatePassword', function(req,res) {
+app.post('/api/updatePassword', function (req, res) {
   const userId = req.body.userId;
+  const oldpass = req.body.oldpass
   const password = req.body.password
   var request = new sql.Request();
-  var hashPassword = bcrypt.hashSync(password, 10);
-    request.input('Password', sql.NVarChar, hashPassword)
-    .input('userId', sql.Int, userId)
-    .execute('stp_PasswordUpdate').then(function (recordsets) {
-      console.log("returnValue:", recordsets.returnValue)
-      // res.end(JSON.stringify(recordsets.recordset));
-      res.json(recordsets.returnValue)
-    }).catch(function (err) {
-      console.log(err);
-    });
+  // var hashPassword = bcrypt.hashSync(password, 10);
+  request.input('userId', sql.Int, userId)
+    .query('select password from tblUsers where userId=@userId and IsDeleted=0', function (err, recordset) {
+      if (err) console.log(err);
+      if (recordset.recordset.length > 0) {
+        var pass = JSON.stringify(recordset.recordset);
+        var p = JSON.parse(pass)[0].password
+        console.log("password:", p)
+        
+        if (bcrypt.compareSync(oldpass, p)) {
+          var hashPassword = bcrypt.hashSync(password, 10);
+          request.input('Password', sql.NVarChar, hashPassword)
+            .input('userId', sql.Int, userId)
+            .execute('stp_PasswordUpdate').then(function (recordsets) {
+              console.log("returnValue:", recordsets.returnValue)
+              // res.end(JSON.stringify(recordsets.recordset));
+              res.json(recordsets)
+            }).catch(function (err) {
+              console.log(err);
+            });
+        } else {
+          res.json('invalid password')
+        }
+      }
+    })
 })
