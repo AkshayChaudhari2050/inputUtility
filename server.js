@@ -1,25 +1,27 @@
-var lodash = require("lodash");
 var express = require("express");
 var bodyParser = require("body-parser");
 router = require('./src/API/route/index');
 var app = express();
-var morgan = require('morgan');
 // var student = require('./student')
-var db = require("./src/API/config/db")
-var jwt = require('jsonwebtoken');
-var passport = require("passport");
-var passportJWT = require("passport-jwt");
+// var db = require("./src/API/config/db")
+var sql = require("mssql");
+const config = {
+  user: 'sa',
+  password: 'sapwd',
+  server: '192.168.0.147', // You can use 'localhost\\instance' to connect to named instance
+  database: 'dbinputUtility',
+}
+var connection = sql.connect(config, function (err) {
+  if (err)
+    throw err;
+});
 //var User = require('./orm')
-var ExtractJwt = passportJWT.ExtractJwt;
-var JwtStrategy = passportJWT.Strategy;
-var jwtOptions = {}
 var bcrypt = require('bcrypt');
-//jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt')
-jwtOptions.secretOrKey = 'tasmanianDevil';
+var morgan = require('morgan')
 var generator = require('generate-password');
 const nodemailer = require('nodemailer');
 let transporter = nodemailer.createTransport({
+
   host: 'smtp.gmail.com',
   port: 465,
   secure: true, // true for 465, false for other ports
@@ -28,7 +30,6 @@ let transporter = nodemailer.createTransport({
     pass: "akki@2050" // generated ethereal password
   }
 });
-
 // headers.append('Access-Control-Allow-Origin', 'http://localhost:3000');
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({
@@ -43,10 +44,9 @@ app.use(function (req, res, next) {
   next();
 });
 app.use(bodyParser.json())
-router(app, db);
+router(app);
 
 app.get("/api/", function (req, res) {
-
   var password = generator.generate({
     length: 10,
     numbers: true
@@ -56,36 +56,23 @@ app.get("/api/", function (req, res) {
     message: "Express is up!"
   });
 });
-const config = {
-  user: 'sa',
-  password: 'sapwd',
-  server: '192.168.0.147', // You can use 'localhost\\instance' to connect to named instance
-  database: 'dbinputUtility',
-  options: {
-    encrypt: true // Use this if you're on Windows Azure
-  }
-}
-
-var sql = require("mssql");
-var connection = sql.connect(config, function (err) {
-  if (err)
-    throw err;
+// sql.close()
+// db.sequelize.sync().then(() => {
+app.listen(5000, function () {
+  console.log("Express running", this.address().port);
 });
-sql.on('error', err => {
-  console.log(err)
-})
-db.sequelize.sync().then(() => {
-  app.listen(5000, function () {
-    console.log("Express running", this.address().port);
-  });
-})
-//Apis
+// })
+///login Api
 app.post('/api/login', (req, res) => {
+  sql.on('error', err => {
+    console.log(err)
+  });
   var Email = req.body.email,
     password = req.body.password;
   var request = new sql.Request();
   // var hashPassword = bcrypt.hashSync(password, 10);
-  request.input('Email', sql.NVarChar, Email)
+  request
+    .input('Email', sql.NVarChar, Email)
     .query('select password from tblUsers where Email=@Email and IsDeleted=0', function (err, recordset) {
       if (err) console.log(err);
       if (recordset.recordset.length > 0) {
@@ -108,8 +95,9 @@ app.post('/api/login', (req, res) => {
         res.json("Email does not Exists")
       }
     });
+  // sql.close();
 });
-
+//Register APi
 app.post('/api/insert', (req, res) => {
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
@@ -129,8 +117,11 @@ app.post('/api/insert', (req, res) => {
     length: 10,
     numbers: true
   });
-  console.log("password" + password)
+  console.log("password=" + password)
   var hashPassword = bcrypt.hashSync(password, 10);
+  sql.on('error', err => {
+    console.log(err)
+  });
   var request = new sql.Request();
   request.input('Email', sql.NVarChar, Email)
     .input('Password', sql.NVarChar, hashPassword)
@@ -166,7 +157,9 @@ app.post('/api/insert', (req, res) => {
     }).catch(function (err) {
       console.log(err);
     });
+  // sql.close();
 })
+
 //get All Users View
 app.get('/api/ProfileView', (req, res) => {
   var request = new sql.Request();
@@ -178,6 +171,7 @@ app.get('/api/ProfileView', (req, res) => {
     console.log(err);
   });
 });
+
 //get Profile By User
 app.get('/api/getProfile/:userId', (req, res) => {
   var request = new sql.Request();
@@ -203,8 +197,8 @@ app.delete('/api/deleteUser/:userId', (req, res) => {
     }).catch(function (err) {
       console.log(err);
     });
-}); // DELETE si
-
+});
+// update Password
 app.post('/api/updatePassword', function (req, res) {
   const userId = req.body.userId;
   const oldpass = req.body.oldpass
@@ -218,7 +212,7 @@ app.post('/api/updatePassword', function (req, res) {
         var pass = JSON.stringify(recordset.recordset);
         var p = JSON.parse(pass)[0].password
         console.log("password:", p)
-        
+
         if (bcrypt.compareSync(oldpass, p)) {
           var hashPassword = bcrypt.hashSync(password, 10);
           request.input('Password', sql.NVarChar, hashPassword)
@@ -236,3 +230,335 @@ app.post('/api/updatePassword', function (req, res) {
       }
     })
 })
+var upload = require('express-fileupload');
+app.use(upload());
+app.get('/', function (req, res) {
+  res.sendFile(__dirname + '/up.html');
+})
+
+/// Daily Sales 
+app.post('/api/dailySales', function (req, res) {
+  if (req.files.file) {
+    var file = req.files.file,
+      name = file.name,
+      type = file.mimetype;
+    data = file.data;
+    var uploadpath = __dirname + '/uploads/' + name;
+    file.mv(uploadpath, function (err) {
+      if (err) {
+        console.log("File Upload Failed", name, err);
+        res.send("Error Occured!")
+      } else {
+        console.log("File Uploaded", name);
+        res.send('Done! Uploading files')
+      }
+    });
+  } else {
+    res.send("No File selected !");
+    res.end();
+  };
+  var Converter = require("csvtojson").Converter;
+  var converter = new Converter({});
+  converter.fromFile(__dirname + "/uploads/" + name, function (err, result) {
+    if (err) {
+      console.log("An Error Has Occured");
+      console.log(err);
+    }
+    sql.connect(config, function (err) {
+      if (err) console.log(err);
+      for (var index = 0; index < result.length; index++) {
+        var string = JSON.stringify(result[index]);
+        var objectValue = JSON.parse(string);
+        //database Fileds
+        var Date = result[index].Date
+        var POS_Credit = objectValue['POS Credit'].replace('$', '')
+        var POS_Debit = objectValue['POS Debit'].replace('$', '')
+        var Self_Activation = objectValue['Self-Activation'].replace('$', '')
+        var Free_Service = objectValue['Free Service'].replace('$', '')
+        var Cash = result[index].Cash.replace('$', '')
+        var Other_Methods = objectValue['Other Methods (Demo, DON, 3rd Party, Transfer)'].replace('$', '')
+        var Total_After_Taxes = objectValue['Total After Taxes'].replace('$', '')
+        var Discount_Amount = objectValue['Discount Amount'].replace('$', '')
+        var To_Tx_Disount = objectValue['Total After Taxes and Discount'].replace('$', '')
+        var Refund = objectValue['Refund'].replace('$', '')
+        var TtlAftrTaxesDisRefund = objectValue['Total After Taxes/Discounts and Refunds'].replace('$', '')
+        //created mssql
+        var request = new sql.Request();
+        request
+          .input('Date', sql.NVarChar, Date)
+          .input('POS_Credit', sql.NVarChar, POS_Credit)
+          .input('POS_Debit', sql.NVarChar, POS_Debit)
+          .input('Self_Activation', sql.NVarChar, Self_Activation)
+          .input('Free_Service', sql.NVarChar, Free_Service)
+          .input('Cash', sql.NVarChar, Cash)
+          .input('Other_Methods', sql.NVarChar, Other_Methods)
+          .input('Total_After_Taxes', sql.NVarChar, Total_After_Taxes)
+          .input('Discount_Amount', sql.NVarChar, Discount_Amount)
+          .input('To_Tx_Disount', sql.NVarChar, To_Tx_Disount)
+          .input('Refund', sql.NVarChar, Refund)
+          .input('TtlAftrTaxesDisRefund', sql.NVarChar, TtlAftrTaxesDisRefund)
+          .execute('sp_save_dailySales')
+          .then(result => {}).catch(function (err) {
+            console.log(err);
+          })
+      }
+    })
+    console.log("data Inserted Succuslly")
+    // res.json("data Inserted Succuslly")
+  });
+  sql.close()
+  // res.send('File uploa  ded!');
+});
+
+app.post('/api/DailySalespackage', function (req, res) {
+  if (req.files.file) {
+    var file = req.files.file,
+      name = file.name,
+      type = file.mimetype,
+      data = file.data;
+    var uploadpath = __dirname + '/uploads/' + name;
+    file.mv(uploadpath, function (err) {
+      if (err) {
+        console.log("File Upload Failed", name, err);
+        res.send("Error Occured!")
+      } else {
+        console.log("File Uploaded", name);
+        // res.send('Done! Uploading files')
+        // res.send('Done! Uploading files')
+      }
+    });
+  } else {
+    res.send("No File selected !");
+    res.end();
+  };
+  var fs = require('fs'),
+    readline = require('readline');
+  var rd = readline.createInterface({
+    input: fs.createReadStream(__dirname + "/uploads/" + name),
+    output: process.stdout,
+    console: false
+  });
+  var HeadingColumns;
+  sql.on('error', err => {
+    console.log(err)
+  });
+  rd.on('line', function (line) {
+    if (line.indexOf("ate") > 0) {
+      //Heading Row
+      HeadingColumns = line.split(',');
+    } else {
+      //Data Rows
+      var Rowcolumns = line.split(',');
+      // if (err) console.log(err);
+      for (var Columns = 1; Columns < Rowcolumns.length; Columns++) {
+        // var _Days = (HeadingColumns[Columns]).match(/\d+/g);
+        var NoOfDays = (HeadingColumns[Columns]).replace(/[^0-9]/g);
+        // var NoOfDays =_Days.join("");
+        // var str = "HSC_Daily_Sales";
+        for (var i = 0; i < name.length; i++) {
+          if (name[i] == '_') {
+            break
+          }
+          var Hospital = name.substr(0, i + 1);
+        }
+        // console.log(Hospital)
+        var request = new sql.Request();
+        request.input('TransactionDate', sql.NVarChar, Rowcolumns[0])
+          .input('Package', sql.NVarChar, HeadingColumns[Columns])
+          .input('NoOfPackages', sql.Int, Rowcolumns[Columns])
+          .input('Hospital', sql.NVarChar, Hospital)
+          .input('NoOfDays', sql.Int, NoOfDays)
+          .execute('stp_InsertPackage').then(result => {}).catch(function (err) {
+            console.log(err);
+          })
+      }
+    }
+    // console.log("data Inserted Succuslly")
+    // res.json("data Inserted Succuslly")
+  }).on('end', function () {
+    // sql.close();
+    console.log("data Inserted Succuslly")
+  });
+})
+
+
+app.get('/api/getAllSales', (req, res) => {
+  var request = new sql.Request();
+  request.execute('std_GetSalesData').then(function (recordsets) {
+    console.log("returnValue:", recordsets.recordset)
+    // res.end(JSON.stringify(recordsets.recordset));
+    res.json(recordsets.recordset)
+  }).catch(function (err) {
+    console.log(err);
+  });
+});
+
+app.post('/api/MerchantDataInsert', function (req, res) {
+  if (req.files.file) {
+    var file = req.files.file,
+      name = file.name,
+      type = file.mimetype;
+    data = file.data;
+    var uploadpath = __dirname + '/uploads/' + name;
+    file.mv(uploadpath, function (err) {
+      if (err) {
+        console.log("File Upload Failed", name, err);
+        res.send("Error Occured!")
+      } else {
+        console.log("File Uploaded", name);
+        res.send('Done! Uploading files')
+      }
+    });
+  } else {
+    res.send("No File selected !");
+    res.end();
+  };
+  var Converter = require("csvtojson").Converter;
+  var converter = new Converter({});
+  converter.fromFile(__dirname + "/uploads/" + name, function (err, result) {
+    if (err) {
+      console.log("An Error Has Occured");
+      console.log(err);
+    }
+    for (var index = 0; index < result.length; index++) {
+      var string = JSON.stringify(result[index]);
+      var objectValue = JSON.parse(string);
+      //database Fileds
+      // var Date = result[index].Date
+      var MERCHANT_NAME = objectValue['MERCHANT NAME']
+      var reportingMerch = objectValue['REPORTING MERCH #']
+      var SEQ = objectValue['SEQ #']
+      var TR_DATETIME = objectValue['TR DATE/TIME']
+      var CARDHOLDER = objectValue['CARDHOLDER #']
+      var AMT = objectValue['AMT']
+      var AUTH_CODE = objectValue['AUTH CODE']
+      var CARD_TYPE = objectValue['CARD TYPE']
+      var BATCH_CLOSE = objectValue['BATCH CLOSE']
+      var TR_TYPE = objectValue['TR TYPE']
+
+      // console.log(objectValue)
+      var request = new sql.Request();
+      request
+        .input('Merchantnumber', sql.Int, reportingMerch)
+        .input('Merchantname', sql.NVarChar, MERCHANT_NAME)
+        .input('Transitnumber', sql.Int, SEQ)
+        .input('Merchantaddress', sql.NVarChar, null)
+        .input('Merchantdate', sql.NVarChar, TR_DATETIME)
+        .input('merchantday', sql.NVarChar, null)
+        .input('Terminal', sql.NVarChar, null)
+        .input('Account', sql.NVarChar, CARDHOLDER)
+        .input('Expirydate', sql.NVarChar, null)
+        .input('Entrytype', sql.NVarChar, null)
+        .input('Transactionnumber', sql.NVarChar, null)
+        .input('Amount', sql.Int, AMT)
+        .input('Authcode', sql.NVarChar, AUTH_CODE)
+        .input('Cardtype', sql.NVarChar, CARD_TYPE)
+        .input('Settlementdate', sql.NVarChar, BATCH_CLOSE)
+        .input('Sale', sql.Char, TR_TYPE)
+        .input('Reportdate', sql.NVarChar, null)
+        // .input('Dateoftemptable', sql.NVarChar, null)
+        .input('Isactualtable', sql.NVarChar, null)
+        .input('se_id', sql.NVarChar, null)
+        .input('IsDeleted', sql.NVarChar, null)
+        .execute('stp_InsertMerchantData').then(result => {}).catch(function (err) {
+          console.log(err);
+        })
+    }
+    console.log("Data Inserted succes");
+  })
+});
+
+app.post('/api/Moneris', function (req, res) {
+  if (req.files.file) {
+    var file = req.files.file,
+      name = file.name,
+      type = file.mimetype;
+    data = file.data;
+    var uploadpath = __dirname + '/uploads/' + name;
+    file.mv(uploadpath, function (err) {
+      if (err) {
+        console.log("File Upload Failed", name, err);
+        res.send("Error Occured!")
+      } else {
+        console.log("File Uploaded", name);
+        res.send('Done! Uploading files')
+      }
+    });
+  } else {
+    res.send("No File selected !");
+    res.end();
+  };
+
+  var fs = require('fs'),
+    readline = require('readline');
+  var rd = readline.createInterface({
+    input: fs.createReadStream(__dirname + "/uploads/" + name),
+    output: process.stdout,
+    console: false
+  });
+  // console.log(rd)
+  rd.on('line', function (line) {
+    // console.log(line)
+    var Rowcolumns = line.split(',');
+    for (var Columns = 1; Columns < Rowcolumns.length; Columns++) {
+      var Account = Rowcolumns[9].replace(/['"]+/g, '')
+      var CardType = Rowcolumns[7].replace(/['"]+/g, '')
+      var Sale = Rowcolumns[12]
+      var TransistNumber = Rowcolumns[5].replace(/['"]+/g, '')
+      var TransectionNumber = Rowcolumns[6]
+      var AuthCode = Rowcolumns[13].replace(/['"]+/g, '')
+      var Amount = Rowcolumns[12]
+      var MtDate = Rowcolumns[2]
+      var timeData = Rowcolumns[3].replace(/['"]+/g, '').replace(/[.]+/g, ':')
+      var SatlementDate = Rowcolumns[4]
+      var MerchantDay = Rowcolumns[2]
+      var MerchantNumber = Rowcolumns[0]
+    }
+    CardType == "01" ? CardType = 'Visa' : CardType = 'MasterCard'
+    Sale >= 0 ? Sale = "Sale" : Sale = "Return"
+    var MerchantName = name.replace('.csv','')
+    // console.log(MerchantName)
+    //merchant date
+    var finaldate = MtDate.slice(0, 4) + "/" + MtDate.slice(4, 6) + "/" + MtDate.slice(6, 8);
+    MerchantDate = finaldate + " " + timeData
+    // console.log(MerchantDate)
+    var sateDate = SatlementDate.slice(0, 4) + "/" + SatlementDate.slice(4, 6) + "/" + SatlementDate.slice(6, 8);
+    SatlementDate = sateDate
+    // console.log(SatlementDate)
+    var request = new sql.Request();
+    request
+      .input('Merchantnumber', sql.NVarChar, MerchantNumber)
+      .input('Merchantname', sql.NVarChar, MerchantName)
+      .input('Transitnumber', sql.Int, TransistNumber)
+      .input('Merchantaddress', sql.NVarChar, null)
+      .input('Merchantdate', sql.NVarChar, MerchantDate)
+      .input('merchantday', sql.NVarChar, null)
+      .input('Terminal', sql.NVarChar, null)
+      .input('Account', sql.NVarChar, Account)
+      .input('Expirydate', sql.NVarChar, null)
+      .input('Entrytype', sql.NVarChar, null)
+      .input('Transactionnumber', sql.NVarChar, TransectionNumber)
+      .input('Amount', sql.Int, Amount)
+      .input('Authcode', sql.NVarChar, AuthCode)
+      .input('Cardtype', sql.NVarChar, CardType)
+      .input('Settlementdate', sql.NVarChar, SatlementDate)
+      .input('Sale', sql.Char, Sale)
+      .input('Reportdate', sql.NVarChar, null)
+      // .input('Dateoftemptable', sql.NVarChar, null)
+      .input('Isactualtable', sql.NVarChar, null)
+      .input('se_id', sql.NVarChar, null)
+      .input('IsDeleted', sql.NVarChar, null)
+      .execute('stp_InsertMerchantData').then(result => {}).catch(function (err) {
+        console.log(err);
+      })
+    // console.log("Data Inserted succes");
+  }).on('end', function () {
+    // sql.close();
+    console.log("data Inserted Succuslly")
+  });
+})
+
+// var csv = require('csv-array');
+//  csv.parseCSV(__dirname + "/uploads/GRACEMoneris.cssv", function(data){
+//    console.log(JSON.stringify(data));
+//  });
