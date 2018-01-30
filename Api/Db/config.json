@@ -1,0 +1,13 @@
+{
+
+  "dbConfig": {
+    "user": "sa",
+    "password": "sapwd",
+    "server": "192.168.0.147",
+    "database": "dbinputUtility"
+  },
+  "Hospital": {
+    "HospitalID": "1234",
+    "HospitalName": "GRACE"
+  }
+}

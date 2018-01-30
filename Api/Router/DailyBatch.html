@@ -1,0 +1,141 @@
+<html>
+
+<head>
+  <title>Daily Batch Report</title>
+  <!-- external libs from cdnjs -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  <!-- PivotTable.js libs from ../dist -->
+  <link rel="stylesheet" type="text/css" href="https://pivottable.js.org/dist/pivot.css">
+  <script type="text/javascript" src="https://pivottable.js.org/dist/pivot.js"></script>
+  <!-- <script type="text/javascript" src="./jquery.min.1.11.1.js"></script> -->
+  <script type="text/javascript" src="jquery.table2excel.js"></script>
+  <script type="text/javascript" src="subtotal.js"></script>
+  <link rel="stylesheet" type="text/css" href="subtotal.css">
+  <style>
+    body {
+      font-family: Verdana;
+    }
+
+  </style>
+
+  <body>
+    <center>
+      <h2>Daily Batch Report </h2>
+    </center>
+    <center>
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td>
+            From:
+          </td>
+          <td>
+            <input type="text" id="txtFrom" />
+          </td>
+          <td>
+            &nbsp;
+          </td>
+          <td>
+            To:
+          </td>
+          <td>
+            <input type="text" id="txtTo" />
+          </td>	
+          <td> Hospital:</td>
+          <td>
+            <select required id="Hospital">
+              <option value="0">--SELECT--</option>
+              <option value="GRACE">GRACE</option>
+              <option value="HSC">HSC</option>
+            </select>
+          </td>
+        </tr>
+        <br>
+        <tr>
+          <td colspan="20" align="center">
+            <input type="button" id="submit" value="Submit">
+            <!-- <input type="button" id="btnExport" value="Export"> -->
+            <button onclick="exportexcel()"> Export to Excel</button>
+            <!-- <button onclick="exporttocsv()"> Export to CSV</button> -->
+          </td>
+        </tr>
+      </table>
+      <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/start/jquery-ui.css" rel="Stylesheet" type="text/css"
+      />
+      <script type="text/javascript">
+        $(function () {
+          $("#txtFrom").datepicker({
+            dateFormat: 'mm-dd-yy',
+            numberOfMonths: 1,
+            onSelect: function (selected) {
+              var dt = new Date(selected);
+              dt.setDate(dt.getDate() + 1);
+              $("#txtTo").datepicker("option", "minDate", dt);
+            }
+          });
+          $("#txtTo").datepicker({
+            dateFormat: 'mm-dd-yy',
+            numberOfMonths: 1,
+            onSelect: function (selected) {
+              var dt = new Date(selected);
+              dt.setDate(dt.getDate() - 1);
+              $("#txtFrom").datepicker("option", "maxDate", dt);
+            }
+          });
+        });
+
+      </script>
+      <br>
+      <div align='center' id="output" style="margin: 30px;"></div>
+      <script type="text/javascript">
+        $(document).ready(function () {
+          var fromdate, Todate, Hospital;
+          $("#submit").click(function () {
+            debugger;
+            fromdate = $("#txtFrom").val();
+            Todate = $("#txtTo").val();
+            Hospital = $("#Hospital").val();
+            $.post("http://localhost:5000/api/report/GetDailyBatch", {
+              fromdate: fromdate,
+              Todate: Todate,
+              Hospital: Hospital
+            }, function (data) {
+              // var tpl = $.pivotUtilities.aggregatorTemplates;
+              var sum = $.pivotUtilities.aggregatorTemplates.sum;
+              var numberFormat = $.pivotUtilities.numberFormat;
+              var intFormat = numberFormat({
+                digitsAfterDecimal: 2
+              });
+              var dataClass = $.pivotUtilities.SubtotalPivotData;
+              var renderer = $.pivotUtilities.subtotal_renderers["Table With Subtotal"];
+
+              $("#output").pivot(data, {
+                dataClass: dataClass,
+                rows: ["TransactionDate"],
+                cols: ["Hospital", "ReportType","DaysType","PackageType"],
+                aggregator: sum(intFormat)(["UsedDays"]),
+                renderer: renderer
+                // rendererName: "Table With Subtotal"
+              });
+            });
+          });
+        });
+      </script>
+  </body>
+
+</html>
+<script type="text/javascript">
+  function exportexcel() {
+    $(".pvtTable").table2excel({
+      name: "Table2Excel",
+      filename: "myFileName",
+      fileext: ".xls"
+    });
+  }
+  // function exporttocsv() {
+  //   $(".pvtTable").tableToCSV({
+  //     filename: 'employeelist'
+  //   });
+  // }
+
+</script>

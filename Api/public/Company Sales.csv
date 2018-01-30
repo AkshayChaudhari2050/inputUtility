@@ -1,0 +1,457 @@
+﻿Category,SubCategory,OrderYear,OrderQuarter,Sales
+Components,Bottom Brackets,2010,Q3,
+Components,Bottom Brackets,2010,Q4,
+Components,Bottom Brackets,2011,Q1,
+Components,Bottom Brackets,2011,Q2,
+Components,Bottom Brackets,2011,Q3,
+Components,Bottom Brackets,2011,Q4,
+Components,Bottom Brackets,2012,Q1,
+Components,Bottom Brackets,2012,Q2,
+Components,Bottom Brackets,2012,Q3,"$17,454"
+Components,Bottom Brackets,2012,Q4,"$13,339"
+Components,Bottom Brackets,2013,Q1,"$7,727"
+Components,Bottom Brackets,2013,Q2,"$13,307"
+Components,Bottom Brackets,2013,Q3,
+Components,Brakes,2010,Q3,
+Components,Brakes,2010,Q4,
+Components,Brakes,2011,Q1,
+Components,Brakes,2011,Q2,
+Components,Brakes,2011,Q3,
+Components,Brakes,2011,Q4,
+Components,Brakes,2012,Q1,
+Components,Brakes,2012,Q2,
+Components,Brakes,2012,Q3,"$26,659"
+Components,Brakes,2012,Q4,"$18,571"
+Components,Brakes,2013,Q1,"$8,115"
+Components,Brakes,2013,Q2,"$12,716"
+Components,Brakes,2013,Q3,
+Components,Chains,2010,Q3,
+Components,Chains,2010,Q4,
+Components,Chains,2011,Q1,
+Components,Chains,2011,Q2,
+Components,Chains,2011,Q3,
+Components,Chains,2011,Q4,
+Components,Chains,2012,Q1,
+Components,Chains,2012,Q2,
+Components,Chains,2012,Q3,"$3,476"
+Components,Chains,2012,Q4,"$2,218"
+Components,Chains,2013,Q1,"$1,542"
+Components,Chains,2013,Q2,"$2,149"
+Components,Chains,2013,Q3,
+Components,Cranksets,2010,Q3,
+Components,Cranksets,2010,Q4,
+Components,Cranksets,2011,Q1,
+Components,Cranksets,2011,Q2,
+Components,Cranksets,2011,Q3,
+Components,Cranksets,2011,Q4,
+Components,Cranksets,2012,Q1,
+Components,Cranksets,2012,Q2,
+Components,Cranksets,2012,Q3,"$80,244"
+Components,Cranksets,2012,Q4,"$44,127"
+Components,Cranksets,2013,Q1,"$35,461"
+Components,Cranksets,2013,Q2,"$44,233"
+Components,Cranksets,2013,Q3,
+Components,Derailleurs,2010,Q3,
+Components,Derailleurs,2010,Q4,
+Components,Derailleurs,2011,Q1,
+Components,Derailleurs,2011,Q2,
+Components,Derailleurs,2011,Q3,
+Components,Derailleurs,2011,Q4,
+Components,Derailleurs,2012,Q1,
+Components,Derailleurs,2012,Q2,
+Components,Derailleurs,2012,Q3,"$25,385"
+Components,Derailleurs,2012,Q4,"$18,974"
+Components,Derailleurs,2013,Q1,"$6,972"
+Components,Derailleurs,2013,Q2,"$18,932"
+Components,Derailleurs,2013,Q3,
+Components,Forks,2010,Q3,
+Components,Forks,2010,Q4,
+Components,Forks,2011,Q1,
+Components,Forks,2011,Q2,
+Components,Forks,2011,Q3,"$26,167"
+Components,Forks,2011,Q4,"$23,543"
+Components,Forks,2012,Q1,"$9,914"
+Components,Forks,2012,Q2,"$18,345"
+Components,Forks,2012,Q3,
+Components,Forks,2012,Q4,
+Components,Forks,2013,Q1,
+Components,Forks,2013,Q2,
+Components,Forks,2013,Q3,
+Components,Handlebars,2010,Q3,
+Components,Handlebars,2010,Q4,
+Components,Handlebars,2011,Q1,
+Components,Handlebars,2011,Q2,
+Components,Handlebars,2011,Q3,"$35,341"
+Components,Handlebars,2011,Q4,"$18,309"
+Components,Handlebars,2012,Q1,"$6,275"
+Components,Handlebars,2012,Q2,"$17,194"
+Components,Handlebars,2012,Q3,"$43,624"
+Components,Handlebars,2012,Q4,"$21,676"
+Components,Handlebars,2013,Q1,"$6,345"
+Components,Handlebars,2013,Q2,"$21,892"
+Components,Handlebars,2013,Q3,
+Components,Headsets,2010,Q3,
+Components,Headsets,2010,Q4,
+Components,Headsets,2011,Q1,
+Components,Headsets,2011,Q2,
+Components,Headsets,2011,Q3,"$19,702"
+Components,Headsets,2011,Q4,"$16,382"
+Components,Headsets,2012,Q1,"$10,950"
+Components,Headsets,2012,Q2,"$14,102"
+Components,Headsets,2012,Q3,
+Components,Headsets,2012,Q4,
+Components,Headsets,2013,Q1,
+Components,Headsets,2013,Q2,
+Components,Headsets,2013,Q3,
+Components,Mountain Frames,2010,Q3,"$157,502"
+Components,Mountain Frames,2010,Q4,"$214,086"
+Components,Mountain Frames,2011,Q1,"$127,558"
+Components,Mountain Frames,2011,Q2,"$220,935"
+Components,Mountain Frames,2011,Q3,"$608,353"
+Components,Mountain Frames,2011,Q4,"$443,599"
+Components,Mountain Frames,2012,Q1,"$236,070"
+Components,Mountain Frames,2012,Q2,"$440,261"
+Components,Mountain Frames,2012,Q3,"$827,288"
+Components,Mountain Frames,2012,Q4,"$565,230"
+Components,Mountain Frames,2013,Q1,"$309,890"
+Components,Mountain Frames,2013,Q2,"$563,954"
+Components,Mountain Frames,2013,Q3,
+Components,Pedals,2010,Q3,
+Components,Pedals,2010,Q4,
+Components,Pedals,2011,Q1,
+Components,Pedals,2011,Q2,
+Components,Pedals,2011,Q3,
+Components,Pedals,2011,Q4,
+Components,Pedals,2012,Q1,
+Components,Pedals,2012,Q2,
+Components,Pedals,2012,Q3,"$54,185"
+Components,Pedals,2012,Q4,"$39,901"
+Components,Pedals,2013,Q1,"$15,784"
+Components,Pedals,2013,Q2,"$37,661"
+Components,Pedals,2013,Q3,
+Components,Road Frames,2010,Q3,"$91,060"
+Components,Road Frames,2010,Q4,"$152,827"
+Components,Road Frames,2011,Q1,"$47,486"
+Components,Road Frames,2011,Q2,"$155,311"
+Components,Road Frames,2011,Q3,"$957,715"
+Components,Road Frames,2011,Q4,"$458,089"
+Components,Road Frames,2012,Q1,"$132,692"
+Components,Road Frames,2012,Q2,"$457,689"
+Components,Road Frames,2012,Q3,"$755,821"
+Components,Road Frames,2012,Q4,"$286,592"
+Components,Road Frames,2013,Q1,"$79,169"
+Components,Road Frames,2013,Q2,"$277,528"
+Components,Road Frames,2013,Q3,
+Components,Saddles,2010,Q3,
+Components,Saddles,2010,Q4,
+Components,Saddles,2011,Q1,
+Components,Saddles,2011,Q2,
+Components,Saddles,2011,Q3,
+Components,Saddles,2011,Q4,
+Components,Saddles,2012,Q1,
+Components,Saddles,2012,Q2,
+Components,Saddles,2012,Q3,"$24,908"
+Components,Saddles,2012,Q4,"$12,940"
+Components,Saddles,2013,Q1,"$4,999"
+Components,Saddles,2013,Q2,"$13,002"
+Components,Saddles,2013,Q3,
+Components,Touring Frames,2010,Q3,
+Components,Touring Frames,2010,Q4,
+Components,Touring Frames,2011,Q1,
+Components,Touring Frames,2011,Q2,
+Components,Touring Frames,2011,Q3,
+Components,Touring Frames,2011,Q4,
+Components,Touring Frames,2012,Q1,
+Components,Touring Frames,2012,Q2,
+Components,Touring Frames,2012,Q3,"$666,977"
+Components,Touring Frames,2012,Q4,"$367,783"
+Components,Touring Frames,2013,Q1,"$181,738"
+Components,Touring Frames,2013,Q2,"$428,436"
+Components,Touring Frames,2013,Q3,
+Components,Wheels,2010,Q3,
+Components,Wheels,2010,Q4,
+Components,Wheels,2011,Q1,
+Components,Wheels,2011,Q2,
+Components,Wheels,2011,Q3,"$288,628"
+Components,Wheels,2011,Q4,"$163,922"
+Components,Wheels,2012,Q1,"$63,186"
+Components,Wheels,2012,Q2,"$163,930"
+Components,Wheels,2012,Q3,"$1,678"
+Components,Wheels,2012,Q4,$83
+Components,Wheels,2013,Q1,
+Components,Wheels,2013,Q2,
+Components,Wheels,2013,Q3,
+Clothing,Bib-Shorts,2010,Q3,
+Clothing,Bib-Shorts,2010,Q4,
+Clothing,Bib-Shorts,2011,Q1,
+Clothing,Bib-Shorts,2011,Q2,
+Clothing,Bib-Shorts,2011,Q3,"$66,860"
+Clothing,Bib-Shorts,2011,Q4,"$35,323"
+Clothing,Bib-Shorts,2012,Q1,"$21,544"
+Clothing,Bib-Shorts,2012,Q2,"$43,458"
+Clothing,Bib-Shorts,2012,Q3,$351
+Clothing,Bib-Shorts,2012,Q4,
+Clothing,Bib-Shorts,2013,Q1,$234
+Clothing,Bib-Shorts,2013,Q2,$234
+Clothing,Bib-Shorts,2013,Q3,
+Clothing,Caps,2010,Q3,"$1,170"
+Clothing,Caps,2010,Q4,"$1,521"
+Clothing,Caps,2011,Q1,$921
+Clothing,Caps,2011,Q2,"$1,479"
+Clothing,Caps,2011,Q3,"$3,991"
+Clothing,Caps,2011,Q4,"$3,076"
+Clothing,Caps,2012,Q1,"$1,782"
+Clothing,Caps,2012,Q2,"$2,940"
+Clothing,Caps,2012,Q3,"$8,676"
+Clothing,Caps,2012,Q4,"$8,519"
+Clothing,Caps,2013,Q1,"$7,319"
+Clothing,Caps,2013,Q2,"$9,265"
+Clothing,Caps,2013,Q3,$854
+Clothing,Gloves,2010,Q3,
+Clothing,Gloves,2010,Q4,
+Clothing,Gloves,2011,Q1,
+Clothing,Gloves,2011,Q2,
+Clothing,Gloves,2011,Q3,"$52,537"
+Clothing,Gloves,2011,Q4,"$38,360"
+Clothing,Gloves,2012,Q1,"$25,692"
+Clothing,Gloves,2012,Q2,"$41,876"
+Clothing,Gloves,2012,Q3,"$26,945"
+Clothing,Gloves,2012,Q4,"$23,619"
+Clothing,Gloves,2013,Q1,"$14,214"
+Clothing,Gloves,2013,Q2,"$22,079"
+Clothing,Gloves,2013,Q3,"$1,641"
+Clothing,Jerseys,2010,Q3,"$12,391"
+Clothing,Jerseys,2010,Q4,"$15,899"
+Clothing,Jerseys,2011,Q1,"$9,517"
+Clothing,Jerseys,2011,Q2,"$16,931"
+Clothing,Jerseys,2011,Q3,"$48,902"
+Clothing,Jerseys,2011,Q4,"$35,495"
+Clothing,Jerseys,2012,Q1,"$18,205"
+Clothing,Jerseys,2012,Q2,"$31,335"
+Clothing,Jerseys,2012,Q3,"$173,041"
+Clothing,Jerseys,2012,Q4,"$140,703"
+Clothing,Jerseys,2013,Q1,"$102,317"
+Clothing,Jerseys,2013,Q2,"$144,044"
+Clothing,Jerseys,2013,Q3,"$7,884"
+Clothing,Shorts,2010,Q3,
+Clothing,Shorts,2010,Q4,
+Clothing,Shorts,2011,Q1,
+Clothing,Shorts,2011,Q2,
+Clothing,Shorts,2011,Q3,"$26,207"
+Clothing,Shorts,2011,Q4,"$23,177"
+Clothing,Shorts,2012,Q1,"$11,230"
+Clothing,Shorts,2012,Q2,"$21,424"
+Clothing,Shorts,2012,Q3,"$97,610"
+Clothing,Shorts,2012,Q4,"$84,192"
+Clothing,Shorts,2013,Q1,"$65,637"
+Clothing,Shorts,2013,Q2,"$86,668"
+Clothing,Shorts,2013,Q3,"$4,269"
+Clothing,Socks,2010,Q3,"$1,522"
+Clothing,Socks,2010,Q4,"$1,965"
+Clothing,Socks,2011,Q1,"$1,274"
+Clothing,Socks,2011,Q2,"$1,900"
+Clothing,Socks,2011,Q3,
+Clothing,Socks,2011,Q4,
+Clothing,Socks,2012,Q1,
+Clothing,Socks,2012,Q2,
+Clothing,Socks,2012,Q3,"$6,969"
+Clothing,Socks,2012,Q4,"$6,183"
+Clothing,Socks,2013,Q1,"$4,163"
+Clothing,Socks,2013,Q2,"$5,829"
+Clothing,Socks,2013,Q3,$225
+Clothing,Tights,2010,Q3,
+Clothing,Tights,2010,Q4,
+Clothing,Tights,2011,Q1,
+Clothing,Tights,2011,Q2,
+Clothing,Tights,2011,Q3,"$67,088"
+Clothing,Tights,2011,Q4,"$56,782"
+Clothing,Tights,2012,Q1,"$27,588"
+Clothing,Tights,2012,Q2,"$51,601"
+Clothing,Tights,2012,Q3,$780
+Clothing,Tights,2012,Q4,$244
+Clothing,Tights,2013,Q1,
+Clothing,Tights,2013,Q2,$292
+Clothing,Tights,2013,Q3,
+Clothing,Vests,2010,Q3,
+Clothing,Vests,2010,Q4,
+Clothing,Vests,2011,Q1,
+Clothing,Vests,2011,Q2,
+Clothing,Vests,2011,Q3,
+Clothing,Vests,2011,Q4,
+Clothing,Vests,2012,Q1,
+Clothing,Vests,2012,Q2,
+Clothing,Vests,2012,Q3,"$81,086"
+Clothing,Vests,2012,Q4,"$66,883"
+Clothing,Vests,2013,Q1,"$45,482"
+Clothing,Vests,2013,Q2,"$67,871"
+Clothing,Vests,2013,Q3,"$2,223"
+Bikes,Mountain Bikes,2010,Q3,"$2,231,790"
+Bikes,Mountain Bikes,2010,Q4,"$2,903,328"
+Bikes,Mountain Bikes,2011,Q1,"$2,497,518"
+Bikes,Mountain Bikes,2011,Q2,"$2,416,837"
+Bikes,Mountain Bikes,2011,Q3,"$3,141,467"
+Bikes,Mountain Bikes,2011,Q4,"$2,837,647"
+Bikes,Mountain Bikes,2012,Q1,"$2,517,500"
+Bikes,Mountain Bikes,2012,Q2,"$2,908,659"
+Bikes,Mountain Bikes,2012,Q3,"$3,617,012"
+Bikes,Mountain Bikes,2012,Q4,"$3,808,656"
+Bikes,Mountain Bikes,2013,Q1,"$3,473,750"
+Bikes,Mountain Bikes,2013,Q2,"$4,268,134"
+Bikes,Mountain Bikes,2013,Q3,
+Bikes,Road Bikes,2010,Q3,"$2,145,284"
+Bikes,Road Bikes,2010,Q4,"$3,385,551"
+Bikes,Road Bikes,2011,Q1,"$3,171,788"
+Bikes,Road Bikes,2011,Q2,"$3,478,964"
+Bikes,Road Bikes,2011,Q3,"$4,930,693"
+Bikes,Road Bikes,2011,Q4,"$4,189,622"
+Bikes,Road Bikes,2012,Q1,"$3,584,255"
+Bikes,Road Bikes,2012,Q2,"$4,119,659"
+Bikes,Road Bikes,2012,Q3,"$3,844,124"
+Bikes,Road Bikes,2012,Q4,"$3,734,892"
+Bikes,Road Bikes,2013,Q1,"$3,391,876"
+Bikes,Road Bikes,2013,Q2,"$4,001,737"
+Bikes,Road Bikes,2013,Q3,
+Bikes,Touring Bikes,2010,Q3,
+Bikes,Touring Bikes,2010,Q4,
+Bikes,Touring Bikes,2011,Q1,
+Bikes,Touring Bikes,2011,Q2,
+Bikes,Touring Bikes,2011,Q3,
+Bikes,Touring Bikes,2011,Q4,
+Bikes,Touring Bikes,2012,Q1,
+Bikes,Touring Bikes,2012,Q2,
+Bikes,Touring Bikes,2012,Q3,"$3,298,006"
+Bikes,Touring Bikes,2012,Q4,"$3,766,585"
+Bikes,Touring Bikes,2013,Q1,"$3,414,027"
+Bikes,Touring Bikes,2013,Q2,"$4,066,455"
+Bikes,Touring Bikes,2013,Q3,
+Accessories,Bike Racks,2010,Q3,
+Accessories,Bike Racks,2010,Q4,
+Accessories,Bike Racks,2011,Q1,
+Accessories,Bike Racks,2011,Q2,
+Accessories,Bike Racks,2011,Q3,
+Accessories,Bike Racks,2011,Q4,
+Accessories,Bike Racks,2012,Q1,
+Accessories,Bike Racks,2012,Q2,
+Accessories,Bike Racks,2012,Q3,"$75,920"
+Accessories,Bike Racks,2012,Q4,"$60,883"
+Accessories,Bike Racks,2013,Q1,"$37,150"
+Accessories,Bike Racks,2013,Q2,"$63,084"
+Accessories,Bike Racks,2013,Q3,"$2,400"
+Accessories,Bike Stands,2010,Q3,
+Accessories,Bike Stands,2010,Q4,
+Accessories,Bike Stands,2011,Q1,
+Accessories,Bike Stands,2011,Q2,
+Accessories,Bike Stands,2011,Q3,
+Accessories,Bike Stands,2011,Q4,
+Accessories,Bike Stands,2012,Q1,
+Accessories,Bike Stands,2012,Q2,
+Accessories,Bike Stands,2012,Q3,"$6,996"
+Accessories,Bike Stands,2012,Q4,"$11,925"
+Accessories,Bike Stands,2013,Q1,"$8,268"
+Accessories,Bike Stands,2013,Q2,"$10,653"
+Accessories,Bike Stands,2013,Q3,"$1,749"
+Accessories,Bottles and Cages,2010,Q3,
+Accessories,Bottles and Cages,2010,Q4,
+Accessories,Bottles and Cages,2011,Q1,
+Accessories,Bottles and Cages,2011,Q2,
+Accessories,Bottles and Cages,2011,Q3,
+Accessories,Bottles and Cages,2011,Q4,
+Accessories,Bottles and Cages,2012,Q1,
+Accessories,Bottles and Cages,2012,Q2,
+Accessories,Bottles and Cages,2012,Q3,"$11,854"
+Accessories,Bottles and Cages,2012,Q4,"$15,968"
+Accessories,Bottles and Cages,2013,Q1,"$16,105"
+Accessories,Bottles and Cages,2013,Q2,"$18,659"
+Accessories,Bottles and Cages,2013,Q3,"$1,767"
+Accessories,Cleaners,2010,Q3,
+Accessories,Cleaners,2010,Q4,
+Accessories,Cleaners,2011,Q1,
+Accessories,Cleaners,2011,Q2,
+Accessories,Cleaners,2011,Q3,
+Accessories,Cleaners,2011,Q4,
+Accessories,Cleaners,2012,Q1,
+Accessories,Cleaners,2012,Q2,
+Accessories,Cleaners,2012,Q3,"$5,137"
+Accessories,Cleaners,2012,Q4,"$4,724"
+Accessories,Cleaners,2013,Q1,"$3,358"
+Accessories,Cleaners,2013,Q2,"$4,949"
+Accessories,Cleaners,2013,Q3,$350
+Accessories,Fenders,2010,Q3,
+Accessories,Fenders,2010,Q4,
+Accessories,Fenders,2011,Q1,
+Accessories,Fenders,2011,Q2,
+Accessories,Fenders,2011,Q3,
+Accessories,Fenders,2011,Q4,
+Accessories,Fenders,2012,Q1,
+Accessories,Fenders,2012,Q2,
+Accessories,Fenders,2012,Q3,"$7,649"
+Accessories,Fenders,2012,Q4,"$11,759"
+Accessories,Fenders,2013,Q1,"$11,583"
+Accessories,Fenders,2013,Q2,"$13,276"
+Accessories,Fenders,2013,Q3,"$2,352"
+Accessories,Helmets,2010,Q3,"$8,539"
+Accessories,Helmets,2010,Q4,"$11,701"
+Accessories,Helmets,2011,Q1,"$4,946"
+Accessories,Helmets,2011,Q2,"$11,639"
+Accessories,Helmets,2011,Q3,"$33,853"
+Accessories,Helmets,2011,Q4,"$24,871"
+Accessories,Helmets,2012,Q1,"$11,660"
+Accessories,Helmets,2012,Q2,"$25,524"
+Accessories,Helmets,2012,Q3,"$81,538"
+Accessories,Helmets,2012,Q4,"$89,595"
+Accessories,Helmets,2013,Q1,"$72,597"
+Accessories,Helmets,2013,Q2,"$101,789"
+Accessories,Helmets,2013,Q3,"$9,412"
+Accessories,Hydration Packs,2010,Q3,
+Accessories,Hydration Packs,2010,Q4,
+Accessories,Hydration Packs,2011,Q1,
+Accessories,Hydration Packs,2011,Q2,
+Accessories,Hydration Packs,2011,Q3,
+Accessories,Hydration Packs,2011,Q4,
+Accessories,Hydration Packs,2012,Q1,
+Accessories,Hydration Packs,2012,Q2,
+Accessories,Hydration Packs,2012,Q3,"$31,577"
+Accessories,Hydration Packs,2012,Q4,"$27,110"
+Accessories,Hydration Packs,2013,Q1,"$17,904"
+Accessories,Hydration Packs,2013,Q2,"$28,254"
+Accessories,Hydration Packs,2013,Q3,"$1,485"
+Accessories,Locks,2010,Q3,
+Accessories,Locks,2010,Q4,
+Accessories,Locks,2011,Q1,
+Accessories,Locks,2011,Q2,
+Accessories,Locks,2011,Q3,"$6,325"
+Accessories,Locks,2011,Q4,"$3,780"
+Accessories,Locks,2012,Q1,"$2,205"
+Accessories,Locks,2012,Q2,"$3,939"
+Accessories,Locks,2012,Q3,
+Accessories,Locks,2012,Q4,$15
+Accessories,Locks,2013,Q1,
+Accessories,Locks,2013,Q2,
+Accessories,Locks,2013,Q3,
+Accessories,Pumps,2010,Q3,
+Accessories,Pumps,2010,Q4,
+Accessories,Pumps,2011,Q1,
+Accessories,Pumps,2011,Q2,
+Accessories,Pumps,2011,Q3,"$5,157"
+Accessories,Pumps,2011,Q4,"$3,226"
+Accessories,Pumps,2012,Q1,"$1,763"
+Accessories,Pumps,2012,Q2,"$3,382"
+Accessories,Pumps,2012,Q3,
+Accessories,Pumps,2012,Q4,
+Accessories,Pumps,2013,Q1,
+Accessories,Pumps,2013,Q2,
+Accessories,Pumps,2013,Q3,
+Accessories,Tires and Tubes,2010,Q3,
+Accessories,Tires and Tubes,2010,Q4,
+Accessories,Tires and Tubes,2011,Q1,
+Accessories,Tires and Tubes,2011,Q2,
+Accessories,Tires and Tubes,2011,Q3,
+Accessories,Tires and Tubes,2011,Q4,
+Accessories,Tires and Tubes,2012,Q1,
+Accessories,Tires and Tubes,2012,Q2,
+Accessories,Tires and Tubes,2012,Q3,"$41,940"
+Accessories,Tires and Tubes,2012,Q4,"$61,948"
+Accessories,Tires and Tubes,2013,Q1,"$61,519"
+Accessories,Tires and Tubes,2013,Q2,"$66,817"
+Accessories,Tires and Tubes,2013,Q3,"$14,230"
+
