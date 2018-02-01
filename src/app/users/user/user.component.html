@@ -1,0 +1,53 @@
+<div class="container">
+  <form #User="ngForm">
+    <div class="col-sm-10">
+      <label for="exampleInputEmail1">User Name</label>
+      <input class="form-control" type="text" name='vcUserName' required="required" #vcUserName="ngModel" [(ngModel)]="UserModel.vcUserName">
+      <div [hidden]="vcUserName.valid || vcUserName.pristine" class="alert alert-danger">
+        <div [hidden]="!vcUserName.hasError('required')">UserName is required</div>
+        <!-- <div [hidden]="!address.hasError('pattern')">Only alphabetsallowed</div> -->
+      </div>
+    </div>
+
+    <div class="col-sm-10">
+      <label for="exampleInputEmail1">User Role</label>
+      <!-- <input class="form-control" type="text" name='vcUserName' required="required" #vcUserName="ngModel" [(ngModel)]="UserModel.vcUserName"> -->
+      <select id="intRoleID" name="intRoleID" class="form-control" required [(ngModel)]="UserModel.intRoleID" #intRoleID="ngModel">
+        <option [ngValue]="undefined" selected> --Select-- </option>
+        <option *ngFor="let r of Roles" [value]="r.intRoleID">{{r.vcRoleName}}</option>
+      </select>
+      <div [hidden]="intRoleID.valid || intRoleID.pristine" class="alert alert-danger">
+        <div [hidden]="!intRoleID.hasError('required')">intRoleID is required</div>
+      </div>
+    </div>
+
+    <div class="col-sm-10">
+      <label for="exampleInputEmail1">Email ID</label>
+      <input class="form-control" type="text" name='vcEmailID' required="required" #vcEmailID="ngModel" [(ngModel)]="UserModel.vcEmailID">
+      <div [hidden]="vcEmailID.valid || vcEmailID.pristine" class="alert alert-danger">
+        <div [hidden]="!vcEmailID.hasError('required')">Email is required</div>
+        <!-- <div [hidden]="!address.hasError('pattern')">Only alphabetsallowed</div> -->
+      </div>
+    </div>
+
+    <div class="col-sm-5">
+      <label for="exampleInputEmail1">bitActive </label>
+      <input class="form-control" type="checkbox" name='bitActive' required="required" #bitActive="ngModel" [(ngModel)]="UserModel.bitActive">
+      <div [hidden]="bitActive.valid || bitActive.pristine" class="alert alert-danger">
+        <div [hidden]="!bitActive.hasError('required')">bitActive is required</div>
+        <!-- <div [hidden]="!address.hasError('pattern')">Only alphabetsallowed</div> -->
+      </div>
+    </div>
+
+    <div>
+      <button (click)="SaveUser(vcUserName.value,intRoleID.value,vcEmailID.value,bitActive.value); User.reset()" [disabled]="User.invalid"
+        class="btn btn-primary">Login</button>
+      <button (click)="User.reset()" class="btn btn-primary">Reset</button>
+      <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+      />
+    </div>
+    <br>
+    <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+    <div *ngIf="success" class="alert alert-success alert-dismissable">{{success}}</div>
+  </form>
+</div>

@@ -3,39 +3,49 @@
   "project": {
     "name": "input-utility"
   },
-  "apps": [
-    {
-      "root": "src",
-      "outDir": "dist",
-      "assets": [
-        "assets",
-        "favicon.ico"
-      ],
-      "index": "index.html",
-      "main": "main.ts",
-      "polyfills": "polyfills.ts",
-      "test": "test.ts",
-      "tsconfig": "tsconfig.app.json",
-      "testTsconfig": "tsconfig.spec.json",
-      "prefix": "app",
-      "styles": [
-        "styles.css"
-      ],
-      "scripts": [],
-      "environmentSource": "environments/environment.ts",
-      "environments": {
-        "dev": "environments/environment.ts",
-        "prod": "environments/environment.prod.ts"
-      }
+  "apps": [{
+    "root": "src",
+    "outDir": "dist",
+    "assets": [
+      "assets",
+      "favicon.ico"
+    ],
+    "index": "index.html",
+    "main": "main.ts",
+    "polyfills": "polyfills.ts",
+    "test": "test.ts",
+    "tsconfig": "tsconfig.app.json",
+    "testTsconfig": "tsconfig.spec.json",
+    "prefix": "app",
+    "styles": [
+      "styles.css",
+      "../node_modules/datatables.net-dt/css/jquery.dataTables.css",
+      "../node_modules/pivottable/dist/pivot.css"
+    ],
+    "scripts": [
+      "../node_modules/jquery/dist/jquery.js",
+      "../node_modules/datatables.net/js/jquery.dataTables.js",
+      "../node_modules/jspdf/dist/jspdf.min.js",
+      "../node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.js",
+      "../node_modules/@ngui/tab/dist/tab.umd.js",
+      "../node_modules/jquery/dist/jquery.min.js",      
+      "../node_modules/pivottable/dist/pivot.min.js",
+      "../node_modules/ng-table-excel-export/ng-table-excel-export.js",
+      "../node_modules/jquery-ui-dist/jquery-ui.min.js"
+    ],
+
+    "environmentSource": "environments/environment.ts",
+    "environments": {
+      "dev": "environments/environment.ts",
+      "prod": "environments/environment.prod.ts"
     }
-  ],
+  }],
   "e2e": {
     "protractor": {
       "config": "./protractor.conf.js"
     }
   },
-  "lint": [
-    {
+  "lint": [{
       "project": "src/tsconfig.app.json",
       "exclude": "**/node_modules/**"
     },
@@ -57,4 +67,5 @@
     "styleExt": "css",
     "component": {}
   }
+
 }

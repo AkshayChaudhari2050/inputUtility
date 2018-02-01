@@ -4,9 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import { User } from './user'
-import { AlertService } from "./alert-service";
 import { AuthHttp, JwtHelper } from 'angular2-jwt';
-import { jwt } from '../jwt'
 import { ServerWithApiUrl } from '../Configuration'
 import { error } from 'util';
 import 'rxjs/add/operator/catch';
@@ -14,11 +12,11 @@ import 'rxjs/add/observable/throw';
 import { Router } from "@angular/router";
 @Injectable()
 export class loginService {
-    private messages: Array<string> = [];
-    UserApi = ServerWithApiUrl;
-    constructor(private http: Http,
-        private alertService: AlertService, private router: Router) { }
 
+    UserApi = ServerWithApiUrl;
+
+    constructor(private http: Http,
+        private router: Router) { }
     login(email, password) {
         debugger
         let headers = new Headers({ 'Content-Type': 'application/json' });
@@ -46,11 +44,6 @@ export class loginService {
             }
         });
     }
-    ///logout
-    logout() {
-        localStorage.removeItem('currentUser');
-    }
-    //Update Password
     updatePassword(userId, password, Cpassword, oldpass) {
         debugger
         let headers = new Headers({ 'Content-Type': 'application/json' });

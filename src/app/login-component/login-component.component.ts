@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import { User } from './user';
 import { Router } from "@angular/router";
-import { AlertService } from "./alert-service";
+// import { AlertService } from "./alert-service";
 import { error } from 'selenium-webdriver';
 import { catchError, map, tap } from 'rxjs/operators';
 
@@ -15,17 +15,16 @@ import { catchError, map, tap } from 'rxjs/operators';
   selector: 'app-login-component',
   templateUrl: './login-component.component.html',
   styleUrls: ['./login-component.component.scss'],
-  providers: [loginService, AlertService]
+  providers: [loginService]
 })
 export class LoginComponentComponent implements OnInit {
   constructor(
-    private alertService: AlertService,
     private loginService: loginService,
     private router: Router,
     private http: Http
   ) { }
   ngOnInit() {
-    this.loginService.logout()
+  
   }
   User = new User()
   loading = false;

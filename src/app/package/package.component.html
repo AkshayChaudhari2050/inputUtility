@@ -1,0 +1,31 @@
+<!-- <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script> -->
+<div class="container" #content>
+  <button (click)="exportToExcel()" class="btn btn-primary">Export to excel</button>
+  <!-- <button (click)="exportAsToExcel()" class="btn btn-primary">Export to excel</button>   -->
+  <button (click)="exportToCsv()" class="btn btn-primary">Export to Csv</button>
+  <button (click)="generatePDF()">Generate pdf</button>  
+  <button id="pdf"  (click)="window.print()">Export</button>
+  <button (click)="pdfHtml()">Html Pdf </button>
+
+  <table datatable [dtOptions]="dtOptions" id="table" [dtTrigger]="dtTrigger" class="row-border hover">
+    <thead>
+      <tr>
+        <th>TransactionDate</th>
+        <th>Package</th>
+        <th>NoOfPackages</th>
+        <th>NoOfDays</th>
+        <th>Hospital</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let Package of packages">
+        <td>{{ Package.TransactionDate }}</td>
+        <td>{{ Package.Package }}</td>
+        <td>{{ Package.NoOfPackages }}</td>
+        <td>{{ Package.NoOfDays }}</td>
+        <td>{{ Package.Hospital }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

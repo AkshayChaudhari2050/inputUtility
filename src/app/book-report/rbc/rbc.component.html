@@ -1,0 +1,83 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="header">
+            <h4 class="title"> RBC Report Data</h4>
+            <button (click)="exportexcel()">Export to excel</button>
+            <!-- <button (click)="exportexcel()">Export to excel</button> -->
+          </div>
+          <br>
+          <div>
+            <form>
+              <div [formGroup]="filterForm">
+                <!-- <input type="text" #FromDate /> -->
+                <tr>
+                  <td>
+                    From:
+                  </td>
+                  <td>
+                    <input #FromDate type="text" #dateFromDp="dpDayPicker" [dpDayPicker]="dayPickerConfig" [theme]="'dp-material'" formControlName="dateFrom"
+                      (onChange)="date = $event" [required]="required" id="txtFrom" />
+                  </td>
+                 
+                  <td>
+                    To:
+                  </td>
+                  <td>
+                    <input #ToDate type="text" #dateToDp="dpDayPicker" [dpDayPicker]="dayPickerConfig" [displayDate]="displayDate" [theme]="'dp-material'"
+                      formControlName="dateTo" [required]="required" (onChange)="date = $event" id="txtTo" />
+                    <input type="Submit" value="Submit" (click)="getRBCReport(FromDate.value,ToDate.value)" />
+              </div>
+            </form>
+          </div>
+          <br>
+        </div>
+        <div class="content table-responsive table-full-width">
+          <table id='datatable' class="table table-hover table-striped">
+            <thead>
+              <tr>
+                <th>!TRNS</th>
+                <th>TRNSID</th>
+                <th>TRANSTYPE</th>
+                <th>DATE</th>
+                <th>ACCNT</th>
+                <th>DOCNUM</th>
+                <th>AMOUNT</th>
+                <th>MEMO</th>
+              </tr>
+              <tr>
+                <th>!SPL</th>
+                <th>SPLID</th>
+                <th>TRANSTYPE</th>
+                <th>DATE</th>
+                <th>ACCNT</th>
+                <th>DOCNUM</th>
+                <th>AMOUNT</th>
+                <th>MEMO</th>
+              </tr>
+              <tr>
+                <th>!ENDTRNS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let book of NewData">
+                <td>{{book.ENDTRNS}}</td>
+                <td>{{book.SPLID}}</td>
+                <td>{{book.TRANSTYPE}}</td>
+                <td>{{book.TRANSDATE}}</td>
+                <td>{{book.ACCNT}}</td>
+                <td>{{book.DOCNUM}}</td>
+                <td>{{book.AMOUNT}}</td>
+                <td>{{book.MEMO}}</td>
+                <td>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

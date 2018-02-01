@@ -1,17 +1,29 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<link data-require="bootstrap@*" data-semver="4.0.5" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"/>
-
+<link data-require="bootstrap@*" data-semver="4.0.5" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+/>
 <script data-require="bootstrap@*" data-semver="4.0.5" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"></script>
-<!-- <link  rel="stylesheet" href="../assets/bootstrap.min.css"/> -->
-<!-- <script  src="../assets/bootstrap.min.js"></script> -->
+<script type="text/javascript" src="https://raw.githubusercontent.com/blsrm/ngTableExcelExport/master/ng-table-excel-export.min.js"></script>
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/start/jquery-ui.css" rel="Stylesheet" type="text/css"
+/>
 <div style="text-align:center">
   <h1>
     Welcome to {{ title }}!
   </h1>
 </div>
 <nav align='center'>
-  <a routerLink="Users">users</a>
-  <a routerLink="Profile">Register</a>
-  <a routerLink="Profiles">Profiles</a>
+  <!-- <a routerLink="Users">Users</a>|
+  <a routerLink="Profile">Register</a>|
+  <a routerLink="Profiles">Profiles</a>|
+    <a routerLink="package">Package</a>| -->
+  <a routerLink="Create">Create</a>|
+  <a routerLink="Login">Login</a>|
+  <a routerLink="fileUpload">FileUpload</a>|
+  <a routerLink="BookReport">Book Report</a>|
+  <a routerLink="bookReportOutFlow">bookReportOutFlow</a>|
+  <a routerLink="RBCReport">RBC Report</a>|
+  <!-- <a routerLink="DailyBatch">Daily Batch</a> -->
+  <a routerLink="DailyBatch">Daily Batch</a>|
+  <a routerLink="Reconciliation">Reconciliation</a>
 </nav>
-<router-outlet></router-outlet>
+<div>
+  <router-outlet></router-outlet>

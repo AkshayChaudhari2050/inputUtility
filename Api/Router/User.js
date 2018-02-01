@@ -4,7 +4,7 @@ module.exports = (app, db) => {
   var bodyParser = require("body-parser");
   var bcrypt = require('bcrypt');
   var morgan = require('morgan')
-   app.use(bodyParser.json())
+  app.use(bodyParser.json())
   app.use(morgan('dev'));
   app.use(bodyParser.urlencoded({
     extended: true
@@ -182,4 +182,75 @@ module.exports = (app, db) => {
         }
       })
   })
+
+  // Creating User Master 
+  app.post('/api/SaveUserMaster', function (req, res) {
+    var gpc = require('generate-pincode')
+    var pin = gpc(4)
+    var id = pin + ''
+    console.log("pin:", id)
+    var LoginID = bcrypt.hashSync(id, 5);
+
+    var request = new sql.Request();
+    request.input('intUserID', sql.Int, 0)
+      .input('vcUserName', sql.VarChar, req.body.vcUserName)
+      .input('vcLoginID', sql.VarChar, LoginID)
+      .input('intRoleID', sql.Int, req.body.intRoleID)
+      .input('vcEmailID', sql.VarChar, req.body.vcEmailID)
+      .input('bitActive', sql.Bit, req.body.bitActive)
+      .input('bitChangePwdOnLogin', sql.Bit, null)
+      .output('intSucess', sql.Int, null)
+      .input("vcGeneratedLoginId", sql.VarChar, null)
+      .execute('dbo.STP_SaveUser').then(function (output) {
+        console.log(output.output.intSucess)
+        res.json(output.output.intSucess)
+      })
+  })
+
+  //get Roles
+  app.get('/api/GetAllRoles', function (req, res) {
+    var request = new sql.Request();
+    request.execute('dbo.STP_ListRole').then(function (output) {
+      console.log(output.recordset[0].vcRoleName)
+      res.json(output.recordset)
+      // })
+    })
+  })
+  // bcrypt.compare("9074", "$2a$05$INLC/gIIdZdKu2AjXgP6kuTHwP3IHCS54cRIr8sTXQGU4YIjOy6MW", function (err, res) {
+  //   // res == true
+  //   console.log(res) 3861
+  //   console.log(err)
+  // });
+  // login api
+  app.post('/api/user/login', (req, res) => {
+    var r
+    var vcLoginID = req.body.vcLoginID
+    var request = new sql.Request();
+    request.input('vcLoginID', sql.VarChar, vcLoginID)
+      .query("SELECT vcLoginId  FROM TblUserMaster", function (err, recordset) {
+        if (err) console.log(err);
+        if (recordset.recordset.length > 0) {
+          for (i = 0; i < recordset.recordset.length; i++) {
+            var has = recordset.recordset[0].vcLoginId
+            if (bcrypt.compareSync(vcLoginID, has)) {
+              request.input('vcLoginID', sql.VarChar, has)
+                .execute('dbo.STP_GetLoginDetail').then(function (output) {
+                  // console.log(output.recordset)
+                  res.json(output.recordset) // })  
+                  r = true
+                  return true
+                })
+            } else {
+              r = false
+            }
+          }
+          if (r == false) {
+            res.json(false)
+          }
+        } else {
+          res.json("Email does not Exists")
+        }
+      })
+  })
+
 }

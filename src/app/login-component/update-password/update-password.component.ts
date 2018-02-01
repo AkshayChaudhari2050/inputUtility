@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { pass } from './pass'
 import { loginService } from '../login-service'
-import { AlertService } from "../alert-service";
 import { Router } from "@angular/router";
 @Component({
   selector: 'app-update-password',
   templateUrl: './update-password.component.html',
   styleUrls: ['./update-password.component.css'],
-  providers: [loginService, AlertService]
+  providers: [loginService]
 })
 export class UpdatePasswordComponent implements OnInit {
   pass = new pass();

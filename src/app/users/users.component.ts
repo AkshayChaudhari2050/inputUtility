@@ -11,6 +11,9 @@ import { Router } from '@angular/router';
 
 export class UsersComponent implements OnInit {
   Users: any = [];
+  loading = false;
+  error = '';
+  success=''
   constructor(private usersService: UsersService, public http: Http, private router: Router) { }
 
   ngOnInit() {

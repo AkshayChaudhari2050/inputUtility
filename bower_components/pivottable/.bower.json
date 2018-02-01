@@ -1,0 +1,40 @@
+{
+  "name": "pivottable",
+  "description": "Javascript Pivot Table (aka Pivot Grid, Pivot Chart, Cross-Tab) implementation with drag'n'drop",
+  "version": "2.19.0",
+  "main": [
+    "dist/pivot.js",
+    "dist/pivot.css"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "examples"
+  ],
+  "keywords": [
+    "pivot",
+    "crosstab",
+    "grid",
+    "table",
+    "pivottable",
+    "pivotgrid",
+    "pivotchart",
+    "jquery"
+  ],
+  "homepage": "https://pivottable.js.org",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nicolaskruchten/pivottable.git"
+  },
+  "dependencies": {
+    "jquery": ">=1.9.0"
+  },
+  "_release": "2.19.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.19.0",
+    "commit": "0b0b83d5d905c35d28b8b0742028769bdb36578e"
+  },
+  "_source": "https://github.com/nicolaskruchten/pivottable.git",
+  "_target": ">=2.7.0",
+  "_originalSource": "pivottable"
+}

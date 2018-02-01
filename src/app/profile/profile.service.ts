@@ -10,6 +10,7 @@ import { UserModel } from './UserModel'
 // import { UserModel2 } from './UserModel2';
 @Injectable()
 export class ProfileService {
+  
   UserModel: UserModel[];
   UserApiUrl = ServerWithApiUrl + 'insert'
   constructor(private http: Http, private router: Router) { }
@@ -17,7 +18,6 @@ export class ProfileService {
   userId: number
   addProfile(UserModel: UserModel) {
     let headers = new Headers();
-
     headers.append('Content-Type', 'application/json');
     // headers.append('Authorization', `JWT ${this.token.token}`);
     let options = new RequestOptions({ headers: headers });
